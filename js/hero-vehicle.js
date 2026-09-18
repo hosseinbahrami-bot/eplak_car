@@ -308,26 +308,16 @@
       if (!this.ctx) return null;
 
       try {
-        let arrayBuffer = null;
-        if (window.REAL_VEHICLE_AUDIO_DATA && window.REAL_VEHICLE_AUDIO_DATA[key]) {
-          const b64 = window.REAL_VEHICLE_AUDIO_DATA[key];
-          const bin = window.atob(b64);
-          const len = bin.length;
-          const bytes = new Uint8Array(len);
-          for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
-          arrayBuffer = bytes.buffer;
-        } else {
-          const res = await fetch(`audio/${key}.wav`);
-          arrayBuffer = await res.arrayBuffer();
-        }
-
+        const res = await fetch(`audio/${key}.wav`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const arrayBuffer = await res.arrayBuffer();
         const decoded = await new Promise((resolve, reject) => {
-          this.ctx.decodeAudioData(arrayBuffer.slice(0), resolve, reject);
+          this.ctx.decodeAudioData(arrayBuffer, resolve, reject);
         });
         this.decodedBuffers[key] = decoded;
         return decoded;
       } catch (err) {
-        console.warn('Audio decode error for', key, err);
+        console.warn('Audio fetch/decode error for', key, err);
         return null;
       }
     }
@@ -686,11 +676,14 @@
       if (modelNameEl) modelNameEl.textContent = cfg.name;
       if (specsEl) specsEl.textContent = cfg.specs;
 
-      // 1. Immediately wipe previous headlights & ground glow to avoid premature flashing before image renders
+      // 1. Immediately wipe previous headlights & ground glow to avoid premature flashing
       if (lightsLayer) lightsLayer.innerHTML = '';
       if (groundGlow) groundGlow.style.opacity = '0';
 
+      let applied = false;
       const applyNewVehicle = () => {
+        if (applied) return;
+        applied = true;
         if (lightsLayer) {
           lightsLayer.innerHTML = this.renderHeadlightsHtml(cfg);
         }
@@ -704,18 +697,17 @@
         // Trigger high-beam double flash ONLY after the vehicle image has loaded and is cleanly displayed!
         setTimeout(() => {
           this.triggerDoubleFlash();
-        }, isInitial ? 180 : 160);
+        }, isInitial ? 180 : 120);
       };
 
       if (img) {
-        const cleanCfgSrc = cfg.image.split('?')[0];
-        if (img.complete && img.src.includes(cleanCfgSrc)) {
+        img.src = cfg.image;
+        if (img.complete) {
           applyNewVehicle();
         } else {
-          img.onload = () => {
-            applyNewVehicle();
-          };
-          img.src = cfg.image;
+          img.onload = () => applyNewVehicle();
+          img.onerror = () => applyNewVehicle();
+          setTimeout(applyNewVehicle, 80); // Safety fail-safe guaranteed execution
         }
       } else {
         applyNewVehicle();
