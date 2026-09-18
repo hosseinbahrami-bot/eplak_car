@@ -6,9 +6,10 @@
  *      * Motor: Honda CB1300 Super Four (White-Red)
  *      * Truck: 2024 Scania V8 770S Cab-Over Heavy Tractor (Teal & Chrome)
  *  - Headlight optics strictly and exclusively inside physical glass lenses
- *  - Guaranteed Image-First Headlights: Image completely renders and displays before any high-beam flash
- *  - Interactive Cockpit Speedometer / Gauge Cluster (صفحه کیلومتر و دور موتور هوشمند)
- *  - Authentic Engine Starter Sequence (استارت کرانک -> روشن شدن -> آیدل و کاتاف)
+ *  - NO light puddle on the ground during double flash or standby
+ *  - Honda CB1300 headlight perfectly fitted and rotated to the physical chrome headlight bowl
+ *  - Pure, realistic analog Tachometer Gauge (دور موتور) without any speedometer
+ *  - Authentic Engine Starter Sequence with rich 4-cylinder CB1300 acoustics
  */
 
 (function (window) {
@@ -32,7 +33,6 @@
         { id: 'strip-l', x: 32.32, y: 61.20, w: 16, h: 5, isStrip: true },
         { id: 'strip-r', x: 45.31, y: 61.98, w: 18, h: 5, isStrip: true }
       ],
-      groundGlow: { x: 42.0, y: 72.0, w: 36, h: 16 },
       exhaust: {
         x: 67.5,
         y: 64.5,
@@ -79,13 +79,13 @@
       specs: 'انجین ۱۲۸۴ سی‌سی ۴ سیلندر خطی · ۱۱۴ اسب بخار · گشتاور ۱۱۹ نیوتن‌متر',
       image: 'images/motor-hero.jpg?v=35',
       audioBtnLabel: 'استارت هوندا CB1300',
-      idleRpm: 1000,
+      idleRpm: 1050,
       revRpm: 7800,
       maxRpm: 9600,
+      // Precision sub-pixel coordinates fitting the tilted chrome round headlight bowl
       headlights: [
-        { id: 'cb-headlight', x: 60.16, y: 38.02, w: 32, h: 32, isRound: true }
+        { id: 'cb-headlight', x: 60.94, y: 39.19, w: 22, h: 44, rotateDeg: -10, isCbEllipse: true }
       ],
-      groundGlow: { x: 60.16, y: 65.0, w: 26, h: 14 },
       exhaust: {
         x: 37.3,
         y: 50.8,
@@ -142,7 +142,6 @@
         { id: 'bump-l', x: 34.61, y: 59.10, w: 26, h: 13, isProjector: true },
         { id: 'bump-r', x: 47.18, y: 59.89, w: 28, h: 13, isProjector: true }
       ],
-      groundGlow: { x: 41.0, y: 73.5, w: 34, h: 16 },
       exhaust: {
         x: 58.24,
         y: 14.97,
@@ -322,7 +321,6 @@
       }
     }
 
-    // Preload all assets in memory for 0ms lag
     preload(type) {
       this.init();
       if (!this.ctx) return;
@@ -334,7 +332,6 @@
       this._getBuffer(revKey);
     }
 
-    // Authentic Engine Starter Sequence
     async startWithStarter(type, onEngineCaught) {
       this.init();
       if (!this.ctx) return;
@@ -351,7 +348,6 @@
       const idleKey = type === 'car' ? 'car_idle' : (type === 'motor' ? 'motor_idle' : 'truck_idle');
       const revKey = type === 'car' ? 'car_rev' : (type === 'motor' ? 'motor_rev' : 'truck_rev');
 
-      // Concurrently ensure starter and loop buffers
       const [startBuf, idleBuf, revBuf] = await Promise.all([
         this._getBuffer(starterKey),
         this._getBuffer(idleKey),
@@ -365,7 +361,6 @@
       this.masterGain.gain.setValueAtTime(0.42, now);
       this.masterGain.connect(this.ctx.destination);
 
-      // Play starter cranking audio
       if (startBuf) {
         this.starterSource = this.ctx.createBufferSource();
         this.starterSource.buffer = startBuf;
@@ -374,7 +369,6 @@
       }
 
       const starterDuration = startBuf ? startBuf.duration : 2.0;
-      // Overlap point where engine catches fire and settles into idle
       const catchDelayMs = Math.max(150, Math.floor((starterDuration - 0.4) * 1000));
 
       setTimeout(() => {
@@ -384,7 +378,6 @@
       }, catchDelayMs);
     }
 
-    // Direct loop start (for seamless switching while already running)
     async startDirect(type) {
       this.init();
       if (!this.ctx) return;
@@ -421,7 +414,6 @@
       const baseRate = this.baseRates[type] || 1.0;
       const playTime = this.ctx.currentTime;
 
-      // 1. Idle Combustion Loop
       if (idleBuf) {
         this.idleGain = this.ctx.createGain();
         this.idleGain.gain.setValueAtTime(1.0, playTime);
@@ -436,7 +428,6 @@
         this.idleSource.start(playTime);
       }
 
-      // 2. Rev / Load Exhaust Roar Loop
       if (revBuf) {
         this.revGain = this.ctx.createGain();
         this.revGain.gain.setValueAtTime(0.001, playTime);
@@ -627,14 +618,12 @@
       this.limiterTimer = null;
       this.audio = new VehicleAudioEngine();
 
-      // Engine & Gauge State
+      // Dedicated Tachometer State
       this.isEngineRunning = false;
       this.isStarting = false;
       this.isGaugeSweeping = false;
       this.currentRpm = 0;
       this.targetRpm = 0;
-      this.currentSpeed = 0;
-      this.targetSpeed = 0;
 
       this.smokeSprite = getSmokeSprite();
       this.cssW = 600;
@@ -657,12 +646,10 @@
         window.addEventListener('resize', this._onResize);
       }
 
-      // Preload audio files
       this.audio.preload('car');
       this.audio.preload('motor');
       this.audio.preload('heavy');
 
-      // Double Flash Button
       const flashBtn = document.getElementById('vehFlashBtn');
       if (flashBtn) {
         flashBtn.onclick = (e) => {
@@ -671,7 +658,6 @@
         };
       }
 
-      // Gas / Throttle Button: Supports Click + PRESS & HOLD FOR REV LIMITER (کاتاف)
       const revBtn = document.getElementById('vehRevBtn');
       if (revBtn) {
         const onStart = (e) => {
@@ -695,7 +681,6 @@
         };
       }
 
-      // Push-to-Start Button
       const audioBtn = document.getElementById('vehAudioBtn');
       if (audioBtn) {
         audioBtn.onclick = (e) => {
@@ -704,7 +689,6 @@
         };
       }
 
-      // Click vehicle image for headlights double flash
       const stageClickable = document.getElementById('vehInteractiveArea');
       if (stageClickable) {
         stageClickable.onclick = (e) => {
@@ -714,7 +698,6 @@
         };
       }
 
-      // Initialize Main Animation & Cluster Render Loop
       if (this.animId) cancelAnimationFrame(this.animId);
       this.startMainLoop();
     }
@@ -733,13 +716,13 @@
     }
 
     /**
-     * GUARANTEED IMAGE-FIRST VEHICLE SWITCH:
+     * GUARANTEED IMAGE-FIRST VEHICLE SWITCH (WITH ZERO GROUND LIGHT):
      * 1. Wipes previous headlights completely
      * 2. Pre-decodes new image in RAM
      * 3. Sets image source and awaits double requestAnimationFrame compositor paint
-     * 4. Renders headlights in low beam
-     * 5. Pauses 350ms so user clearly sees the car on stage
-     * 6. Double high-beam flash fires!
+     * 4. Renders headlights in low beam (strictly in glass lenses)
+     * 5. Pauses 340ms so user clearly sees the vehicle resting on the turntable
+     * 6. Double high-beam flash fires strictly in lenses!
      */
     async switchVehicle(type, isInitial = false) {
       if (this.isThrottling) this.stopThrottle();
@@ -750,18 +733,16 @@
 
       const img = document.getElementById('vehMainImg');
       const lightsLayer = document.getElementById('vehHeadlightsLayer');
-      const groundGlow = document.getElementById('vehGroundGlow');
       const modelNameEl = document.getElementById('vehModelName');
       const specsEl = document.getElementById('vehSpecs');
       const stage = document.getElementById('heroVehicleStage');
 
-      // 1. Immediately wipe previous headlights, glow, and any running flash animation
+      // 1. Immediately wipe previous headlights & stop any running flash animation
       if (stage) stage.classList.remove('double-flash-active');
       if (lightsLayer) {
         lightsLayer.innerHTML = '';
         lightsLayer.style.opacity = '0';
       }
-      if (groundGlow) groundGlow.style.opacity = '0';
 
       // 2. Pre-decode the new vehicle image completely in memory before touching the DOM
       const preImg = new Image();
@@ -774,7 +755,6 @@
         }
       } catch (_) {}
 
-      // Guard if user clicked away to another tab in the meantime
       if (this.activeType !== type) return;
 
       // 3. Update DOM texts and image
@@ -786,23 +766,14 @@
       await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       if (this.activeType !== type) return;
 
-      // 5. Render headlights & ground glow
+      // 5. Render headlights in low beam (No ground light whatsoever)
       if (lightsLayer) {
         lightsLayer.innerHTML = this.renderHeadlightsHtml(cfg);
         lightsLayer.style.opacity = '1';
       }
-      if (groundGlow) {
-        groundGlow.style.left = `${cfg.groundGlow.x}%`;
-        groundGlow.style.top = `${cfg.groundGlow.y}%`;
-        groundGlow.style.width = `${cfg.groundGlow.w}%`;
-        groundGlow.style.height = `${cfg.groundGlow.h}%`;
-        groundGlow.style.opacity = '1';
-      }
 
-      // Update button label
       this.updateAudioButtonUi();
 
-      // If engine was already running, transition audio smoothly
       if (this.isEngineRunning) {
         this.audio.startDirect(type);
         this.targetRpm = cfg.idleRpm;
@@ -823,9 +794,10 @@
     renderHeadlightsHtml(cfg) {
       let html = '';
       cfg.headlights.forEach((hl) => {
-        const shapeClass = hl.isStrip ? 'strip-lens' : (hl.isRound ? 'round-lens' : 'projector-lens');
+        const shapeClass = hl.isStrip ? 'strip-lens' : (hl.isCbEllipse ? 'cb-ellipse-lens' : (hl.isRound ? 'round-lens' : 'projector-lens'));
+        const transformExtra = hl.rotateDeg ? `transform: translate(-50%, -50%) rotate(${hl.rotateDeg}deg);` : '';
         html += `
-          <div class="headlight-lens ${shapeClass}" style="left:${hl.x}%; top:${hl.y}%; width:${hl.w}px; height:${hl.h}px;">
+          <div class="headlight-lens ${shapeClass}" style="left:${hl.x}%; top:${hl.y}%; width:${hl.w}px; height:${hl.h}px; ${transformExtra}">
             <div class="lamp-crystal-core"></div>
             <div class="lamp-soft-halo"></div>
           </div>`;
@@ -857,10 +829,8 @@
       if (this.isStarting) return;
 
       if (this.isEngineRunning) {
-        // Stop Engine
         this.stopEngine();
       } else {
-        // Start Engine with authentic starter crank
         await this.startEngineSequence();
       }
     }
@@ -871,21 +841,21 @@
       const cfg = VEHICLE_CONFIGS[this.activeType];
 
       const btn = document.getElementById('vehAudioBtn');
-      const cluster = document.getElementById('vehGaugeCluster');
+      const gauge = document.getElementById('vehTachGauge');
       if (btn) {
         btn.classList.add('is-starting');
         btn.classList.remove('engine-running');
         const lbl = btn.querySelector('.btn-lbl');
         if (lbl) lbl.textContent = 'در حال استارت...';
       }
-      if (cluster) {
-        cluster.classList.add('is-running');
+      if (gauge) {
+        gauge.classList.add('is-running');
       }
 
-      // 1. Cockpit Gauge Sweep (تست عقربه سوییچ)
+      // 1. Cockpit Tachometer Gauge Sweep (عقربه‌کشی سوپراسپرت سوییچ)
       this.isGaugeSweeping = true;
       const startTime = performance.now();
-      const sweepDuration = 1800; // 1.8s sweep
+      const sweepDuration = 1850;
 
       const runSweep = (now) => {
         if (!this.isGaugeSweeping) return;
@@ -893,20 +863,17 @@
         const progress = Math.min(1.0, elapsed / sweepDuration);
 
         if (progress < 0.45) {
-          // 0 to Max Redline sweep
+          // 0 to 10,000 RPM Max sweep
           const p = progress / 0.45;
-          this.currentRpm = (cfg ? cfg.maxRpm : 9000) * Math.sin(p * Math.PI / 2);
-          this.currentSpeed = Math.floor(25 * p);
+          this.currentRpm = 10000 * Math.sin(p * Math.PI / 2);
         } else if (progress < 0.75) {
-          // Drop back to 0
+          // Return to 0
           const p = (progress - 0.45) / 0.3;
-          this.currentRpm = (cfg ? cfg.maxRpm : 9000) * (1 - p);
-          this.currentSpeed = Math.floor(25 * (1 - p));
+          this.currentRpm = 10000 * (1 - p);
         } else {
-          // Blip to initial idle
+          // Blip and settle onto idle
           const p = (progress - 0.75) / 0.25;
           this.currentRpm = (cfg ? cfg.idleRpm : 800) * p;
-          this.currentSpeed = 0;
         }
 
         if (progress < 1.0) {
@@ -919,11 +886,9 @@
 
       // 2. Play Starter Cranking Sound
       await this.audio.startWithStarter(this.activeType, () => {
-        // Engine Caught & Running!
         this.isStarting = false;
         this.isEngineRunning = true;
         this.targetRpm = cfg.idleRpm;
-        this.targetSpeed = 0;
         this.updateAudioButtonUi();
       });
     }
@@ -933,14 +898,13 @@
       this.isStarting = false;
       this.isGaugeSweeping = false;
       this.targetRpm = 0;
-      this.targetSpeed = 0;
 
       this.audio.stop();
       this.updateAudioButtonUi();
 
-      const cluster = document.getElementById('vehGaugeCluster');
-      if (cluster) {
-        cluster.classList.remove('is-running', 'is-revving');
+      const gauge = document.getElementById('vehTachGauge');
+      if (gauge) {
+        gauge.classList.remove('is-running', 'is-revving');
       }
     }
 
@@ -962,7 +926,6 @@
 
     // START THROTTLE (گاز دادن و کاتاف)
     async startThrottle() {
-      // If engine is not running yet, auto-start first!
       if (!this.isEngineRunning && !this.isStarting) {
         await this.startEngineSequence();
         return;
@@ -975,11 +938,11 @@
       const cfg = VEHICLE_CONFIGS[this.activeType];
       const stage = document.getElementById('heroVehicleStage');
       const revBtn = document.getElementById('vehRevBtn');
-      const cluster = document.getElementById('vehGaugeCluster');
+      const gauge = document.getElementById('vehTachGauge');
 
       if (stage) stage.classList.add('vehicle-rev-squat');
       if (revBtn) revBtn.classList.add('throttling-active');
-      if (cluster) cluster.classList.add('is-revving');
+      if (gauge) gauge.classList.add('is-revving');
 
       const emitBurst = () => {
         if (this.canvas && cfg) {
@@ -992,7 +955,6 @@
       };
       emitBurst();
 
-      // Rev-up loop (reaches 100% in ~380ms)
       if (this.throttleTimer) clearInterval(this.throttleTimer);
       this.throttleTimer = setInterval(() => {
         if (!this.isThrottling) return;
@@ -1021,10 +983,8 @@
           return;
         }
 
-        // Trigger audio limiter cut stutter (کاتاف)
         this.audio.triggerLimiterCut(this.activeType);
 
-        // Rapid limiter smoke puff
         if (this.canvas && cfg) {
           const emitX = (cfg.exhaust.x / 100) * this.cssW;
           const emitY = (cfg.exhaust.y / 100) * this.cssH;
@@ -1033,7 +993,6 @@
           }
         }
 
-        // Micro vibration bounce on stage
         if (stage) {
           stage.classList.toggle('limiter-shake');
         }
@@ -1056,13 +1015,13 @@
 
       const stage = document.getElementById('heroVehicleStage');
       const revBtn = document.getElementById('vehRevBtn');
-      const cluster = document.getElementById('vehGaugeCluster');
+      const gauge = document.getElementById('vehTachGauge');
 
       if (stage) {
         stage.classList.remove('vehicle-rev-squat', 'limiter-shake');
       }
       if (revBtn) revBtn.classList.remove('throttling-active');
-      if (cluster) cluster.classList.remove('is-revving');
+      if (gauge) gauge.classList.remove('is-revving');
 
       if (this.isEngineRunning) {
         this.audio.releaseThrottle(this.activeType);
@@ -1072,20 +1031,16 @@
     /**
      * Main Animation Loop:
      * - Renders dynamic smoke particles only when engine running
-     * - Drives Cockpit Gauge Cluster (عقربه دور موتور، سرعت دیجیتال، دنده، چراغ کاتاف)
+     * - Drives Pure Analog Racing Tachometer Gauge (دور موتور)
      */
     startMainLoop() {
       let frameCount = 0;
       const sprite = this.smokeSprite || getSmokeSprite();
 
-      const needleEl = document.getElementById('clusterNeedle');
-      const arcEl = document.getElementById('clusterRpmArc');
-      const shiftLightEl = document.getElementById('clusterShiftLight');
-      const gearEl = document.getElementById('clusterGear');
-      const speedNumEl = document.getElementById('clusterSpeedNum');
+      const needleGroup = document.getElementById('tachNeedleGroup');
+      const shiftLightEl = document.getElementById('tachShiftLight');
+      const statusDotEl = document.getElementById('tachStatusDot');
       const rpmNumEl = document.getElementById('vehRpmValue');
-      const readyIconEl = document.getElementById('clusterReadyIcon');
-      const engineIconEl = document.getElementById('clusterEngineIcon');
 
       const loop = () => {
         this.animId = requestAnimationFrame(loop);
@@ -1094,7 +1049,7 @@
         const cfg = VEHICLE_CONFIGS[this.activeType];
         if (!cfg) return;
 
-        // 1. Smoke Canvas rendering (only emits when engine is on)
+        // 1. Smoke rendering (strictly when engine is on)
         if (this.canvas && this.ctx) {
           const cw = this.cssW;
           const ch = this.cssH;
@@ -1116,7 +1071,7 @@
           }
         }
 
-        // 2. Cockpit Instrument Cluster Dynamics
+        // 2. Tachometer RPM Dynamics
         if (!this.isGaugeSweeping) {
           if (this.isEngineRunning) {
             if (this.isThrottling) {
@@ -1124,83 +1079,49 @@
                 // Cutoff Limiter Jitter (پرش عقربه در کاتاف)
                 const jitter = (Math.random() - 0.5) * (cfg.maxRpm * 0.05);
                 this.targetRpm = cfg.maxRpm + jitter;
-                this.targetSpeed = this.activeType === 'car' ? 118 : (this.activeType === 'motor' ? 95 : 42);
               } else {
                 this.targetRpm = cfg.idleRpm + (cfg.revRpm - cfg.idleRpm) * this.throttleProgress;
-                this.targetSpeed = (this.activeType === 'car' ? 110 : (this.activeType === 'motor' ? 90 : 40)) * this.throttleProgress;
               }
             } else {
-              this.targetRpm = cfg.idleRpm;
-              this.targetSpeed = 0;
+              // Subtle natural engine breathing micro-jitter at idle (±12 RPM)
+              const idleJitter = (Math.random() - 0.5) * 14;
+              this.targetRpm = cfg.idleRpm + idleJitter;
             }
           } else {
             this.targetRpm = 0;
-            this.targetSpeed = 0;
           }
 
-          // Smooth interpolation towards target
-          this.currentRpm += (this.targetRpm - this.currentRpm) * 0.20;
-          this.currentSpeed += (this.targetSpeed - this.currentSpeed) * 0.18;
+          this.currentRpm += (this.targetRpm - this.currentRpm) * 0.22;
         }
 
-        // Cluster calculations
-        const maxGaugeRpm = (cfg.maxRpm || 9000) * 1.05;
-        const progress = Math.max(0, Math.min(1.0, this.currentRpm / maxGaugeRpm));
-        // Dial sweeps from -115 deg to +115 deg (230 total sweep)
-        const needleAngle = -115 + (progress * 230);
-        const arcOffset = 170 * (1 - progress);
+        // Dedicated Tachometer Needle Rotation:
+        // 0 to 10,000 RPM maps across 270 degrees (-135deg to +135deg)
+        const progress = Math.max(0, Math.min(1.0, this.currentRpm / 10000));
+        const needleAngle = -135 + (progress * 270);
 
-        // Apply to SVG Needle & Arc
-        if (needleEl) {
-          needleEl.style.transform = `rotate(${needleAngle.toFixed(1)}deg)`;
-        }
-        if (arcEl) {
-          arcEl.style.strokeDashoffset = `${arcOffset.toFixed(1)}`;
+        if (needleGroup) {
+          needleGroup.style.transform = `rotate(${needleAngle.toFixed(1)}deg)`;
         }
 
-        // Shift Light (Flashes when RPM >= 92% of max)
+        // Shift Light (Flashes when RPM >= 8200)
         if (shiftLightEl) {
-          if (progress >= 0.92) {
+          if (progress >= 0.82) {
             shiftLightEl.classList.add('active');
           } else {
             shiftLightEl.classList.remove('active');
           }
         }
 
-        // Transmission Gear Indicator
-        if (gearEl) {
-          if (!this.isEngineRunning && !this.isStarting) {
-            gearEl.textContent = 'P';
-            gearEl.className = 'cluster-gear';
-          } else if (this.isThrottling) {
-            gearEl.textContent = '1';
-            gearEl.className = 'cluster-gear gear-drive';
-          } else {
-            gearEl.textContent = 'N';
-            gearEl.className = 'cluster-gear gear-n';
-          }
+        // Status Dot
+        if (statusDotEl) {
+          if (this.isEngineRunning) statusDotEl.classList.add('active');
+          else statusDotEl.classList.remove('active');
         }
 
-        // Digital Speedometer (KM/H)
-        if (speedNumEl) {
-          const spdVal = Math.round(this.currentSpeed);
-          speedNumEl.textContent = spdVal.toLocaleString('fa-IR');
-        }
-
-        // Digital RPM Readout
+        // Digital RPM Readout (دور موتور فقط)
         if (rpmNumEl) {
           const rpmVal = Math.max(0, Math.round(this.currentRpm));
           rpmNumEl.textContent = rpmVal.toLocaleString('fa-IR');
-        }
-
-        // Status Icons
-        if (readyIconEl) {
-          if (this.isEngineRunning) readyIconEl.classList.add('active');
-          else readyIconEl.classList.remove('active');
-        }
-        if (engineIconEl) {
-          if (this.isEngineRunning) engineIconEl.classList.add('off');
-          else engineIconEl.classList.remove('off');
         }
       };
 

@@ -511,30 +511,12 @@ html[data-theme="day"] .body-card .bt-img img {
   z-index: 5;
 }
 
-/* Ground reflection */
+/* Floor reflection pool: DISABLED completely per user requirement */
 .veh-ground-glow {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.75) 0%, rgba(11, 152, 156, 0.45) 45%, transparent 75%);
-  filter: blur(12px);
-  pointer-events: none;
-  z-index: 3;
-  opacity: 0.35;
-  will-change: opacity, transform;
-  transform: translateZ(0);
+  display: none !important;
 }
 .hero-vehicle-stage.double-flash-active .veh-ground-glow {
-  animation: groundDoubleFlash 0.72s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
-}
-
-@keyframes groundDoubleFlash {
-  0% { opacity: 0.2; transform: scale(0.9); }
-  14% { opacity: 0.95; transform: scale(1.28); }
-  28% { opacity: 0.15; transform: scale(0.95); }
-  38% { opacity: 0.15; transform: scale(0.95); }
-  52% { opacity: 1; transform: scale(1.35); }
-  68% { opacity: 0.22; transform: scale(0.98); }
-  100% { opacity: 0.4; transform: scale(1); }
+  display: none !important;
 }
 
 /* Hyper-Natural Headlight Optics */
@@ -587,17 +569,19 @@ html[data-theme="day"] .body-card .bt-img img {
   transform: translateZ(0);
 }
 
-/* Floor reflection pool */
-.veh-ground-glow {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(200, 235, 255, 0.3) 40%, transparent 70%);
-  filter: blur(10px);
+.headlight-lens.cb-ellipse-lens {
+  border-radius: 50% / 50%;
   pointer-events: none;
-  z-index: 3;
+}
+.headlight-lens.cb-ellipse-lens .lamp-crystal-core {
+  border-radius: 50% / 50%;
+  background: radial-gradient(ellipse at 46% 48%, #ffffff 20%, rgba(255, 255, 255, 0.96) 50%, rgba(200, 235, 255, 0.6) 80%, transparent 100%);
+  box-shadow: 0 0 12px 4px rgba(255, 255, 255, 0.95), 0 0 24px 6px rgba(11, 152, 156, 0.5);
+  opacity: 0.65;
+}
+.headlight-lens.cb-ellipse-lens .lamp-soft-halo {
+  border-radius: 50% / 50%;
   opacity: 0.28;
-  will-change: opacity, transform;
-  transform: translateZ(0);
 }
 
 /* Natural High-Beam Double Flash (0 to 540ms) */
@@ -606,9 +590,6 @@ html[data-theme="day"] .body-card .bt-img img {
 }
 .hero-vehicle-stage.double-flash-active .lamp-soft-halo {
   animation: naturalHighBeamHalo 0.54s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
-}
-.hero-vehicle-stage.double-flash-active .veh-ground-glow {
-  animation: naturalHighBeamGround 0.54s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
 }
 
 @keyframes naturalHighBeamCore {
@@ -680,228 +661,129 @@ html[data-theme="day"] .body-card .bt-img img {
   pointer-events: none;
 }
 
-/* Digital-Analog Cockpit Instrument Cluster (صفحه کیلومتر سوپراسپرت) */
-.veh-gauge-cluster {
+/* Authentic Racing Cockpit Tachometer (گیج دور موتور آنالوگ سوپراسپرت) */
+.veh-tachometer-gauge {
+  position: relative;
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #101c24 0%, #061015 70%, #03080b 100%);
+  border: 2px solid rgba(11, 152, 156, 0.55);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.8), inset 0 2px 5px rgba(255, 255, 255, 0.15), inset 0 -3px 8px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  background: linear-gradient(135deg, rgba(4, 16, 20, 0.88) 0%, rgba(8, 28, 32, 0.84) 100%);
-  border: 1px solid rgba(11, 152, 156, 0.5);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 6px 12px;
-  border-radius: 14px;
-  color: #e6f8f8;
-  direction: ltr;
-  position: relative;
-  overflow: hidden;
-  pointer-events: auto;
+  justify-content: center;
   user-select: none;
+  pointer-events: auto;
+  direction: ltr;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: visible;
 }
 
-.veh-gauge-cluster::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(11, 152, 156, 0.85), rgba(244, 135, 17, 0.85), transparent);
+.veh-tachometer-gauge.is-running {
+  border-color: rgba(11, 152, 156, 0.95);
+  box-shadow: 0 6px 26px rgba(11, 152, 156, 0.35), inset 0 2px 5px rgba(255, 255, 255, 0.2);
 }
 
-.veh-gauge-cluster.is-running {
-  border-color: rgba(11, 152, 156, 0.85);
-  box-shadow: 0 4px 25px rgba(11, 152, 156, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-}
-
-.veh-gauge-cluster.is-revving {
+.veh-tachometer-gauge.is-revving {
   border-color: rgba(244, 135, 17, 0.95);
-  box-shadow: 0 4px 30px rgba(244, 135, 17, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 6px 32px rgba(244, 135, 17, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.25);
 }
 
-.cluster-dial-box {
-  position: relative;
-  width: 60px;
-  height: 46px;
+.tach-shift-light {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.1s;
+  z-index: 5;
+}
+
+.tach-shift-light.active {
+  background: #ef4444;
+  border-color: #fca5a5;
+  box-shadow: 0 0 10px #ef4444, 0 0 22px #ef4444;
+  animation: tachShiftPulse 0.08s infinite alternate;
+}
+
+@keyframes tachShiftPulse {
+  0% { opacity: 0.35; transform: translateX(-50%) scale(0.95); }
+  100% { opacity: 1; transform: translateX(-50%) scale(1.1); }
+}
+
+.tach-dial-wrap {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
 }
 
-.cluster-dial-svg {
+.tach-svg {
   width: 100%;
   height: 100%;
   overflow: visible;
 }
 
-.cluster-track-bg {
-  stroke: rgba(255, 255, 255, 0.15);
+#tachNeedleGroup {
+  transform-origin: 60px 60px;
+  transition: transform 0.06s cubic-bezier(0.1, 0.9, 0.2, 1);
+  will-change: transform;
 }
 
-.cluster-track-active {
-  transition: stroke-dashoffset 0.08s ease-out;
-}
-
-#clusterNeedle {
-  transition: transform 0.08s ease-out;
-  transform-origin: 50px 54px;
-  filter: drop-shadow(0 0 3px #f48711);
-}
-
-.cluster-shift-light {
+.tach-digital-footer {
   position: absolute;
-  top: 1px;
-  right: 1px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #334155;
-  transition: background 0.1s, box-shadow 0.1s;
-}
-
-.cluster-shift-light.active {
-  background: #ef4444;
-  box-shadow: 0 0 8px #ef4444, 0 0 16px #ef4444;
-  animation: shiftLightFlash 0.08s infinite alternate;
-}
-
-@keyframes shiftLightFlash {
-  0% { opacity: 0.3; }
-  100% { opacity: 1; }
-}
-
-.cluster-data {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 104px;
-}
-
-.cluster-data-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 6px;
-}
-
-.cluster-gear {
-  font-size: 13px;
-  font-weight: 800;
-  padding: 1px 6px;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #94a3b8;
-  font-family: monospace, sans-serif;
-  transition: all 0.2s ease;
-}
-
-.cluster-gear.gear-n {
-  color: #10b981;
-  border-color: rgba(16, 185, 129, 0.6);
-  background: rgba(16, 185, 129, 0.15);
-}
-
-.cluster-gear.gear-drive {
-  color: #f48711;
-  border-color: rgba(244, 135, 17, 0.65);
-  background: rgba(244, 135, 17, 0.2);
-}
-
-.cluster-speed {
-  display: flex;
-  align-items: baseline;
-  gap: 3px;
-}
-
-.speed-num {
-  font-size: 19px;
-  font-weight: 900;
-  line-height: 1;
-  color: #ffffff;
-  font-family: 'SF Pro Display', -apple-system, monospace, sans-serif;
-  letter-spacing: -0.5px;
-  min-width: 26px;
-  text-align: right;
-}
-
-.speed-unit {
-  font-size: 9px;
-  font-weight: 700;
-  color: #0b989c;
-  letter-spacing: 0.5px;
-}
-
-.cluster-data-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  padding-top: 2px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.cluster-rpm-digital {
-  display: flex;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
   align-items: center;
   gap: 4px;
+  background: rgba(3, 10, 14, 0.88);
+  border: 1px solid rgba(11, 152, 156, 0.4);
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 4;
+}
+
+.tach-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #64748b;
+  transition: all 0.25s;
+}
+
+.tach-status-dot.active {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.tach-digital-num {
   font-size: 10px;
+  font-family: monospace, -apple-system, sans-serif;
+  color: #e2e8f0;
 }
 
-.rpm-lbl {
-  color: #94a3b8;
-  font-size: 9px;
-}
-
-.rpm-val b {
+.tach-digital-num b {
   color: #f48711;
-  font-weight: 700;
-  font-family: monospace, sans-serif;
+  font-size: 11px;
 }
 
-.rpm-val small {
+.tach-digital-num small {
+  color: #94a3b8;
   font-size: 8px;
-  color: #64748b;
-}
-
-.cluster-status-icons {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.cluster-icon {
-  font-size: 7.5px;
-  font-weight: 800;
-  letter-spacing: 0.3px;
-  padding: 1px 3px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.06);
-}
-
-.icon-engine {
-  color: #eab308;
-  opacity: 0.85;
-}
-
-.icon-engine.off {
-  opacity: 0.2;
-}
-
-.icon-ready {
-  color: #475569;
-  opacity: 0.4;
-  transition: all 0.2s;
-}
-
-.icon-ready.active {
-  color: #10b981;
-  opacity: 1;
-  background: rgba(16, 185, 129, 0.2);
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
 }
 
 .veh-specs-pill {
@@ -1023,25 +905,16 @@ html[data-theme="day"] .body-card .bt-img img {
     left: 8px;
     gap: 6px;
   }
-  .veh-gauge-cluster {
-    padding: 4px 8px;
-    gap: 6px;
-    border-radius: 10px;
+  .veh-tachometer-gauge {
+    width: 98px;
+    height: 98px;
   }
-  .cluster-dial-box {
-    width: 48px;
-    height: 36px;
+  .tach-digital-footer {
+    bottom: 8px;
+    padding: 1px 6px;
   }
-  .cluster-data {
-    min-width: 85px;
-    gap: 1px;
-  }
-  .speed-num {
-    font-size: 15px;
-  }
-  .cluster-gear {
-    font-size: 11px;
-    padding: 0 4px;
+  .tach-digital-num {
+    font-size: 8.5px;
   }
   .veh-specs-pill {
     padding: 3px 8px;

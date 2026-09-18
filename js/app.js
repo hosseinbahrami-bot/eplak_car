@@ -293,49 +293,96 @@
 
             <div class="hero-vehicle-stage" id="heroVehicleStage" title="کلیک کنید تا نور بالا بزند!">
               <div class="veh-media-wrap" id="vehInteractiveArea">
-                <img class="veh-img" id="vehMainImg" src="images/car-hero.jpg?v=20" alt="Eplakcar Atelier Vehicle">
-                <div class="veh-ground-glow" id="vehGroundGlow"></div>
+                <img class="veh-img" id="vehMainImg" src="images/car-hero.jpg?v=35" alt="Eplakcar Atelier Vehicle">
                 <div class="headlights-layer" id="vehHeadlightsLayer"></div>
                 <canvas class="exhaust-smoke-canvas" id="exhaustSmokeCanvas"></canvas>
               </div>
 
               <div class="veh-hud-top">
-                <div class="veh-gauge-cluster" id="vehGaugeCluster" title="صفحه کیلومتر و دور موتور هوشمند">
-                  <div class="cluster-dial-box">
-                    <svg class="cluster-dial-svg" viewBox="0 0 100 62">
-                      <path class="cluster-track-bg" d="M 14 54 A 38 38 0 1 1 86 54" fill="none" stroke-width="4.5" stroke-linecap="round"/>
-                      <path class="cluster-track-active" id="clusterRpmArc" d="M 14 54 A 38 38 0 1 1 86 54" fill="none" stroke="url(#clusterRpmGrad)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="170" stroke-dashoffset="170"/>
+                <div class="veh-tachometer-gauge" id="vehTachGauge" title="گیج تخصصی دور موتور (Tachometer)">
+                  <div class="tach-shift-light" id="tachShiftLight" title="چراغ تعویض دنده و کاتاف"></div>
+                  <div class="tach-dial-wrap">
+                    <svg class="tach-svg" viewBox="0 0 120 120">
                       <defs>
-                        <linearGradient id="clusterRpmGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-                          <stop offset="0%" stop-color="#0b989c"/>
-                          <stop offset="65%" stop-color="#f48711"/>
-                          <stop offset="92%" stop-color="#ef4444"/>
-                        </linearGradient>
+                        <radialGradient id="tachFaceGrad" cx="40%" cy="35%" r="65%">
+                          <stop offset="0%" stop-color="#14212a"/>
+                          <stop offset="70%" stop-color="#081116"/>
+                          <stop offset="100%" stop-color="#03080b"/>
+                        </radialGradient>
+                        <filter id="tachNeedleShadow" x="-20%" y="-20%" width="140%" height="140%">
+                          <feDropShadow dx="0" dy="1.2" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.85"/>
+                        </filter>
                       </defs>
-                      <circle cx="50" cy="54" r="5" fill="#0d1b22" stroke="#f48711" stroke-width="1.5"/>
-                      <line id="clusterNeedle" x1="50" y1="54" x2="50" y2="18" stroke="#f48711" stroke-width="2.2" stroke-linecap="round" transform="rotate(-115 50 54)"/>
+
+                      <circle cx="60" cy="60" r="57" fill="url(#tachFaceGrad)" stroke="rgba(11, 152, 156, 0.55)" stroke-width="1.8"/>
+                      <circle cx="60" cy="60" r="52.5" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1"/>
+
+                      <!-- Redline sector arc (from 8.2 to 10 x1000 RPM) -->
+                      <path d="M 105.9 57.1 A 46 46 0 0 1 92.5 92.5" fill="none" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" opacity="0.85"/>
+
+                      <!-- Graduation Ticks & Sports Numerals -->
+                      <!-- 0 -->
+                      <line x1="30.3" y1="92.5" x2="25.4" y2="94.6" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="36.0" y="86.0" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">0</text>
+
+                      <!-- 1 -->
+                      <line x1="21.1" y1="76.6" x2="15.8" y2="77.9" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="28.5" y="73.0" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">1</text>
+
+                      <!-- 2 -->
+                      <line x1="18.6" y1="59.0" x2="13.1" y2="58.9" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="26.5" y="58.5" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">2</text>
+
+                      <!-- 3 -->
+                      <line x1="23.0" y1="41.7" x2="17.9" y2="39.5" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="30.0" y="44.5" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">3</text>
+
+                      <!-- 4 -->
+                      <line x1="33.7" y1="27.6" x2="29.9" y2="23.8" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="39.0" y="34.0" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">4</text>
+
+                      <!-- 5 (Peak top) -->
+                      <line x1="49.0" y1="19.4" x2="47.2" y2="14.1" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="51.5" y="28.0" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">5</text>
+
+                      <!-- 6 -->
+                      <line x1="66.5" y1="18.5" x2="67.6" y2="13.1" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="65.0" y="27.5" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">6</text>
+
+                      <!-- 7 -->
+                      <line x1="82.4" y1="24.9" x2="85.7" y2="20.4" stroke="rgba(255,255,255,0.95)" stroke-width="1.8" stroke-linecap="round"/>
+                      <text x="77.5" y="32.5" font-size="6.5" font-weight="800" fill="#e2e8f0" text-anchor="middle" font-family="monospace, sans-serif">7</text>
+
+                      <!-- 8 (Redline boundary) -->
+                      <line x1="94.4" y1="37.4" x2="99.4" y2="34.6" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+                      <text x="86.5" y="42.5" font-size="6.5" font-weight="800" fill="#ef4444" text-anchor="middle" font-family="monospace, sans-serif">8</text>
+
+                      <!-- 9 (Redline) -->
+                      <line x1="100.2" y1="53.8" x2="106.1" y2="53.3" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+                      <text x="91.5" y="56.0" font-size="6.5" font-weight="800" fill="#ef4444" text-anchor="middle" font-family="monospace, sans-serif">9</text>
+
+                      <!-- 10 (Max) -->
+                      <line x1="98.5" y1="71.0" x2="104.2" y2="72.6" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/>
+                      <text x="89.5" y="70.5" font-size="6.5" font-weight="800" fill="#ef4444" text-anchor="middle" font-family="monospace, sans-serif">10</text>
+
+                      <!-- Center label: RPM x1000 -->
+                      <text x="60" y="45" font-size="5" font-weight="700" fill="#0b989c" text-anchor="middle" letter-spacing="0.5">RPM ×1000</text>
+
+                      <!-- Dynamic 3D Needle -->
+                      <g id="tachNeedleGroup" filter="url(#tachNeedleShadow)">
+                        <polygon points="58.7,62 59.2,16 60,13 60.8,16 61.3,62 60,68" fill="#f48711"/>
+                        <line x1="60" y1="14" x2="60" y2="60" stroke="#ffffff" stroke-width="0.7" opacity="0.8"/>
+                      </g>
+
+                      <!-- Center Hub Cap -->
+                      <circle cx="60" cy="60" r="7.5" fill="#071116" stroke="#f48711" stroke-width="1.5"/>
+                      <circle cx="60" cy="60" r="3" fill="#f48711"/>
                     </svg>
-                    <div class="cluster-shift-light" id="clusterShiftLight"></div>
                   </div>
 
-                  <div class="cluster-data">
-                    <div class="cluster-data-top">
-                      <span class="cluster-gear" id="clusterGear" title="وضعیت گیربکس">P</span>
-                      <div class="cluster-speed">
-                        <span class="speed-num" id="clusterSpeedNum">۰</span>
-                        <span class="speed-unit">KM/H</span>
-                      </div>
-                    </div>
-                    <div class="cluster-data-bottom">
-                      <div class="cluster-rpm-digital">
-                        <span class="rpm-lbl">دور:</span>
-                        <span class="rpm-val"><b id="vehRpmValue">۰</b> <small>RPM</small></span>
-                      </div>
-                      <div class="cluster-status-icons">
-                        <span class="cluster-icon icon-engine" id="clusterEngineIcon" title="چراغ چک انجین">ENG</span>
-                        <span class="cluster-icon icon-ready" id="clusterReadyIcon" title="وضعیت استارت پیشرانه">READY</span>
-                      </div>
-                    </div>
+                  <div class="tach-digital-footer">
+                    <span class="tach-status-dot" id="tachStatusDot" title="وضعیت پیشرانه"></span>
+                    <span class="tach-digital-num"><b id="vehRpmValue">۰</b> <small>RPM</small></span>
                   </div>
                 </div>
 
