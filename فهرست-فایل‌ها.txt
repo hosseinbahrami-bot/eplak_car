@@ -1,0 +1,55 @@
+صفر چی — فهرست تفکیک‌شده فایل‌ها
+================================
+
+ریشه
+----
+index.html                 پوسته HTML، هدر، فوتر، لود CSS/JS
+README.md                  راهنمای اجرا و ساختار
+فهرست-فایل‌ها.txt          همین فایل
+
+css/
+----
+style.css                  تم زرشکی روز/شب، هدر، کارت‌ها، ادمین، خدمات، برگه کارشناسی
+
+js/
+----
+app.js                     روتر SPA، صفحه اصلی، لیست، جزئیات آگهی
+data.js                    دادهٔ برند، آگهی گالری، شعب، خدمات، قیمت روز
+portal.js                  ورود مراجعه/ادمین، فروشنده، صف بررسی، برگه کارشناسی
+estimate.js                تخمین قیمت + نقشه بدنه/شاسی
+garage3d.js                آتلیه ۳۶۰ با عکس واقعی
+vendor/three.min.js
+vendor/three-garage.js
+vendor/GLTFLoader.js
+vendor/draco/...           دیکودر مدل سه‌بعدی
+
+fonts/
+------
+yekanbakh.woff
+yekan-bold.woff
+yekanbakh-bold.woff2
+yekan.woff
+iransans.woff2
+iransans-bold.woff2
+
+images/
+-------
+logo.png                   وردمارک سفید صفر چی
+logo-mark.png              آیکون مربعی زرشکی (فاوآیکون)
+hero.jpg, bmw-m5.jpg, porsche.jpg, ...   تصاویر عمومی سایت
+svc-fine.jpg               ۰۱ استعلام خلافی
+svc-custom.jpg             ۰۲ خرید سفارشی
+svc-trade.jpg              ۰۳ معاوضه
+svc-loan.jpg               ۰۴ خرید اقساطی
+svc-estimate.jpg           ۰۵ تخمین قیمت
+svc-inspect.jpg            ۰۶ کارشناسی تخصصی
+svc-price.jpg              ۰۷ قیمت روز
+svc-compare.jpg            ۰۸ مقایسه خودرو
+svc-alert.jpg              ۰۹ گوش‌به‌زنگ
+body/                      برش نوع بدنه (sedan, suv, ...)
+flags/                     پرچم کشورها
+garage/                    فریم‌های ۳۶۰ آتلیه (M4 / Patrol / LC)
+
+models/
+-------
+car.glb, car-concept.glb, car-sport.glb

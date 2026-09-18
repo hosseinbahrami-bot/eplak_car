@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="day">
+<head>
+  <meta charset="UTF-8">
+  <script>
+    (function(){
+      function apply(m){document.documentElement.setAttribute("data-theme",m);try{localStorage.setItem("sc_theme",m);}catch(e){}}
+      try{var t=localStorage.getItem("sc_theme");if(t)apply(t);}catch(e){}
+      window.scToggleTheme=function(e){if(e)e.preventDefault();var c=document.documentElement.getAttribute("data-theme")||"day";apply(c==="night"?"day":"night");};
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>صفر چی | بازار سوپرپریمیوم خودرو</title>
+  <meta name="description" content="صفر چی — بازار واقعی خودروهای صفر و کارکرده. کارشناسی، احراز هویت، قیمت روز، گوش‌به‌زنگ و شعب حضوری.">
+  <link rel="icon" href="images/logo-mark.png">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <link rel="stylesheet" href="css/style.css?v=63">
+  <link rel="preload" href="images/garage/pat-q.jpg" as="image">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="header-inner">
+        <div class="header-right">
+          <a class="logo" href="#/">
+            <img class="logo-word" src="images/logo.png" alt="صفر چی">
+          </a>
+          <button class="icon-btn menu-toggle" id="menuToggle" aria-label="منو">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <div class="header-icons">
+            <a class="icon-btn" href="#/alert" title="گوش‌به‌زنگ">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V10a6 6 0 1 1 12 0v6l1.5 2h-15L6 16z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+            </a>
+            <a class="icon-btn" href="#/compare" title="مقایسه">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 4v16M17 4v16M4 8h6M14 16h6"/></svg>
+              <span class="dot" id="cmpCount" style="display:none"></span>
+            </a>
+            <a class="icon-btn" href="#/account" title="علاقه‌مندی">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.2A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 2.8C19 15.6 12 20 12 20z"/></svg>
+              <span class="dot" id="favCount" style="display:none"></span>
+            </a>
+          </div>
+        </div>
+        <nav class="nav" id="mainNav">
+          <a href="#/cars">خودرو</a>
+          <a href="#/motor">موتورسیکلت</a>
+          <a href="#/heavy" class="nav-more">سنگین</a>
+          <a href="#/estimate">تخمین قیمت</a>
+          <a href="#/prices">قیمت روز</a>
+          <a href="#/specs" class="nav-more">مشخصات فنی</a>
+          <a href="#/inspect">کارشناسی</a>
+          <a href="#/branches">شعب</a>
+          <a href="#/blog" class="nav-more">مجله</a>
+          <a href="#/services" class="nav-more">خدمات</a>
+        </nav>
+        <div class="header-tools">
+          <button class="icon-btn theme-btn" id="themeToggle" type="button" title="حالت روز / شب" aria-label="حالت روز و شب">
+            <svg class="icon-sun" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="9" cy="9" r="3.2"/><path d="M9 1.5v1.6M9 14.9v1.6M1.5 9h1.6M14.9 9h1.6M3.4 3.4l1.1 1.1M13.5 13.5l1.1 1.1M3.4 14.6l1.1-1.1M13.5 4.5l1.1-1.1"/></svg>
+            <svg class="icon-moon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 10.2A6.2 6.2 0 1 1 7.8 3 4.8 4.8 0 0 0 15 10.2z"/></svg>
+          </button>
+          <button class="btn btn-ghost" id="openLogin" type="button"><span id="userLabel">ورود</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main id="view"></main>
+
+    <footer class="footer">
+      <div class="wrap ft-brand">
+        <a class="logo" href="#/">
+          <img class="logo-word" src="images/logo.png" alt="صفر چی">
+        </a>
+        <p>از انتخاب تا تحویل کلید؛ کارشناسی، احراز هویت و قیمت منصفانه.</p>
+        <p>مرکز تماس: ۰۲۱−۹۱۰۰۹۰۰۰</p>
+      </div>
+      <div class="wrap ft-cols">
+        <nav class="ft-col">
+          <h4>بازار</h4>
+          <a href="#/cars">آگهی خودرو</a>
+          <a href="#/motor">موتورسیکلت</a>
+          <a href="#/heavy">سنگین</a>
+          <a href="#/account">ورود / ثبت آگهی</a>
+          <a href="#/estimate">تخمین قیمت</a>
+          <a href="#/prices">قیمت روز</a>
+        </nav>
+        <nav class="ft-col">
+          <h4>خدمات</h4>
+          <a href="#/estimate">تخمین قیمت بدنه</a>
+          <a href="#/inspect">کارشناسی</a>
+          <a href="#/alert">گوش‌به‌زنگ</a>
+          <a href="#/compare">مقایسه</a>
+          <a href="#/specs">مشخصات فنی</a>
+          <a href="#/services">خلافی و اقساط</a>
+        </nav>
+        <nav class="ft-col">
+          <h4>صفر چی</h4>
+          <a href="#/branches">شعب حضوری</a>
+          <a href="#/blog">مجله و راهنما</a>
+          <a href="#/account">حساب کاربری</a>
+          <a href="#/account">حساب فروشنده</a>
+          <a href="#/admin">ورود ادمین</a>
+          <a href="#/services">خرید سفارشی</a>
+          <a href="#/" onclick="setTimeout(()=>document.getElementById('garage')?.scrollIntoView({behavior:'smooth'}),50)">آتلیه سه‌بعدی</a>
+        </nav>
+      </div>
+      <div class="wrap ft-bottom">
+        <span>© ۱۴۰۵ صفر چی — تمامی حقوق محفوظ است.</span>
+        <span>طراحی‌شده به‌عنوان بازار سوپرپریمیوم مستقل</span>
+      </div>
+    </footer>
+  </div>
+
+  <div class="chat">
+    <div class="chat-box" id="chatBox">
+      <div class="chat-head">
+        <div>
+          <b>دستیار هوشمند صفر چی</b>
+          <div class="mute" style="font-size:11px">از آگهی تا قیمت صفر</div>
+        </div>
+        <button class="js-chat-toggle" aria-label="بستن">✕</button>
+      </div>
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="bubble bot">سلام. من دستیار صفر چی هستم. بودجه، برند یا خدمت مورد نظرتان را بگویید.</div>
+      </div>
+      <div class="chat-qs">
+        <button data-q="قیمت روز خودرو صفر">قیمت صفر</button>
+        <button data-q="شعب کجا هستند؟">شعب</button>
+        <button data-q="کارشناسی چطور رزرو کنم؟">کارشناسی</button>
+        <button data-q="آگهی اقساطی می‌خواهم">اقساط</button>
+      </div>
+      <div class="chat-in">
+        <input id="chatInput" placeholder="پیام بنویسید...">
+        <button class="btn btn-gold" id="chatSend">ارسال</button>
+      </div>
+    </div>
+    <button class="chat-btn js-chat-toggle" aria-label="دستیار">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="none" stroke="#1a1406" stroke-width="1.8"><path d="M5 6h14v9H8l-3 3V6z"/></svg>
+    </button>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="toast" id="toast"></div>
+
+  <script src="js/data.js?v=60"></script>
+  <script src="js/estimate.js?v=60"></script>
+  <script src="js/garage3d.js?v=60"></script>
+  <script src="js/portal.js?v=60"></script>
+  <script src="js/app.js?v=63"></script>
+</body>
+</html>
