@@ -230,49 +230,105 @@
       <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-content">
-          <div class="eyebrow">ATELIER · صفر چی</div>
-          <h1>بازار واقعی<br><em>خودروهای خاص</em></h1>
-          <p class="hero-lead">از صفر کیلومتر تا کلکسیونی؛ کارشناسی‌شده، احراز هویت‌شده، با قیمت منصفانه بازار.</p>
-          <div class="search-panel">
-            <div class="tabs" id="vehTabs">
-              <button class="tab ${state.vehicle === "car" ? "active" : ""}" data-veh="car">خودرو</button>
-              <button class="tab ${state.vehicle === "motor" ? "active" : ""}" data-veh="motor">موتور</button>
-              <button class="tab ${state.vehicle === "heavy" ? "active" : ""}" data-veh="heavy">سنگین</button>
+          <div class="hero-main-grid">
+
+            <div class="hero-text-pane">
+              <div class="eyebrow">ATELIER · صفر چی</div>
+              <h1>بازار واقعی<br><em>خودروهای خاص</em></h1>
+              <p class="hero-lead">از صفر کیلومتر تا کلکسیونی؛ کارشناسی‌شده، احراز هویت‌شده، با قیمت منصفانه بازار.</p>
+
+              <div class="search-panel">
+                <div class="tabs" id="vehTabs">
+                  <button class="tab ${state.vehicle === "car" ? "active" : ""}" data-veh="car">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17h14M5 17a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2M7 17v2M17 17v2"/></svg>
+                    <span>خودرو</span>
+                  </button>
+                  <button class="tab ${state.vehicle === "motor" ? "active" : ""}" data-veh="motor">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M9 17h6M12 9l3 8M12 9H9l-3 4"/></svg>
+                    <span>موتور</span>
+                  </button>
+                  <button class="tab ${state.vehicle === "heavy" ? "active" : ""}" data-veh="heavy">
+                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+                    <span>کامیون</span>
+                  </button>
+                </div>
+
+                <form class="search-grid" id="heroSearch">
+                  <div class="field field-q">
+                    <label>جستجو</label>
+                    <input name="q" placeholder="برند یا مدل خودرو…">
+                  </div>
+                  <div class="field" id="heroFilter1">
+                    <label>وضعیت</label>
+                    <select name="status">
+                      <option value="">همه</option>
+                      <option value="zero">صفر</option>
+                      <option value="used">کارکرده</option>
+                    </select>
+                  </div>
+                  <div class="field" id="heroFilter2">
+                    <label>گیربکس</label>
+                    <select name="gear">
+                      <option value="">همه</option>
+                      <option>اتوماتیک</option>
+                      <option>دنده‌ای</option>
+                    </select>
+                  </div>
+                  <div class="field" id="heroFilter3">
+                    <label>بودجه تا</label>
+                    <select name="priceMax">
+                      <option value="">آزاد</option>
+                      <option value="2000000000">۲ میلیارد</option>
+                      <option value="5000000000">۵ میلیارد</option>
+                      <option value="12000000000">۱۲ میلیارد</option>
+                      <option value="25000000000">۲۵ میلیارد</option>
+                    </select>
+                  </div>
+                  <button class="btn btn-gold search-go" type="submit">
+                    <span>جستجوی خودرو</span>
+                  </button>
+                </form>
+              </div>
             </div>
-            <form class="search-grid" id="heroSearch">
-              <div class="field field-q">
-                <label>جستجو</label>
-                <input name="q" placeholder="برند یا مدل…">
+
+            <div class="hero-vehicle-stage" id="heroVehicleStage" title="کلیک کنید تا نور بالا بزند!">
+              <div class="veh-media-wrap" id="vehInteractiveArea">
+                <img class="veh-img" id="vehMainImg" src="images/car-hero.jpg?v=20" alt="Eplakcar Atelier Vehicle">
+                <div class="veh-ground-glow" id="vehGroundGlow"></div>
+                <div class="headlights-layer" id="vehHeadlightsLayer"></div>
+                <canvas class="exhaust-smoke-canvas" id="exhaustSmokeCanvas"></canvas>
               </div>
-              <div class="field">
-                <label>وضعیت</label>
-                <select name="status">
-                  <option value="">همه</option>
-                  <option value="zero">صفر</option>
-                  <option value="used">کارکرده</option>
-                </select>
+
+              <div class="veh-hud-top">
+                <div class="veh-telemetry-pill">
+                  <span class="veh-live-dot"></span>
+                  <span>پیشرانه فعال · <b id="vehRpmValue">۷۵۰</b> RPM</span>
+                </div>
+                <div class="veh-specs-pill" id="vehSpecs">V6 توئین‌توربو · ۶۰۰ اسب بخار</div>
               </div>
-              <div class="field">
-                <label>گیربکس</label>
-                <select name="gear">
-                  <option value="">همه</option>
-                  <option>اتوماتیک</option>
-                  <option>دنده‌ای</option>
-                </select>
+
+              <div class="veh-hud-bottom">
+                <div class="veh-model-badge">
+                  <b id="vehModelName">سوپراسپرت نیسان GT-R نیسمو</b>
+                  <small>آتلیه تخصصی صفر چی · تست چراغ و پیشرانه</small>
+                </div>
+                <div class="veh-actions-bar">
+                  <button type="button" class="veh-act-btn btn-flash" id="vehFlashBtn" title="نور بالا دوبل">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <span>نور بالا</span>
+                  </button>
+                  <button type="button" class="veh-act-btn btn-rev" id="vehRevBtn" title="نگه دارید تا کاتاف بزند">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                    <span>گاز دادن (کاتاف)</span>
+                  </button>
+                  <button type="button" class="veh-act-btn btn-audio" id="vehAudioBtn" title="صدای واقعی انجین">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+                    <span class="btn-lbl">صدا: خاموش</span>
+                  </button>
+                </div>
               </div>
-              <div class="field">
-                <label>بودجه تا</label>
-                <select name="priceMax">
-                  <option value="">آزاد</option>
-                  <option value="1000000000">۱ میلیارد</option>
-                  <option value="2000000000">۲ میلیارد</option>
-                  <option value="5000000000">۵ میلیارد</option>
-                  <option value="12000000000">۱۲ میلیارد</option>
-                  <option value="25000000000">۲۵ میلیارد</option>
-                </select>
-              </div>
-              <button class="btn btn-gold search-go" type="submit">جستجو</button>
-            </form>
+            </div>
+
           </div>
         </div>
       </section>
@@ -549,6 +605,18 @@
           </div>
         </div>
       </section>`;
+
+    if (window.heroVehicleCtrl) {
+      window.heroVehicleCtrl.destroy();
+      window.heroVehicleCtrl = null;
+    }
+    if (window.HeroVehicleController) {
+      window.heroVehicleCtrl = new window.HeroVehicleController();
+      window.heroVehicleCtrl.init();
+      if (state.vehicle) {
+        window.heroVehicleCtrl.switchVehicle(state.vehicle, true);
+      }
+    }
   }
 
   function filterSidebar(kind) {
@@ -809,7 +877,7 @@
       const y = h - 20 - (p / 110) * (h - 40);
       i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
     });
-    ctx.strokeStyle = "#e8b59a";
+    ctx.strokeStyle = "#0b989c";
     ctx.lineWidth = 2;
     ctx.stroke();
   }
@@ -1369,6 +1437,9 @@
     if (veh) {
       state.vehicle = veh.dataset.veh;
       $$("#vehTabs .tab").forEach((t) => t.classList.toggle("active", t === veh));
+      if (window.heroVehicleCtrl) {
+        window.heroVehicleCtrl.switchVehicle(state.vehicle);
+      }
     }
     const sort = e.target.closest("[data-sort]");
     if (sort) {
@@ -1384,6 +1455,10 @@
     const id = parts[1];
     window.scrollTo(0, 0);
     if (window.SC && SC.disposeGarage3D) SC.disposeGarage3D();
+    if (page !== "home" && raw !== "/" && window.heroVehicleCtrl) {
+      window.heroVehicleCtrl.destroy();
+      window.heroVehicleCtrl = null;
+    }
     $("#overlay").className = "overlay";
     $("#overlay").innerHTML = "";
 
@@ -1498,7 +1573,11 @@
         q: fd.get("q"),
         status: fd.get("status"),
         gear: fd.get("gear"),
-        priceMax: fd.get("priceMax") ? +fd.get("priceMax") : null
+        priceMax: fd.get("priceMax") ? +fd.get("priceMax") : null,
+        volume: fd.get("volume"),
+        class: fd.get("class"),
+        heavyType: fd.get("heavyType"),
+        emission: fd.get("emission")
       };
       const dest = state.vehicle === "motor" ? "#/motor" : state.vehicle === "heavy" ? "#/heavy" : "#/cars";
       location.hash = dest;

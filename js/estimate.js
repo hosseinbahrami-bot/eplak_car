@@ -369,15 +369,15 @@
       `<rect data-part="${id}" class="car-part${sel(id)}" x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${fill(id)}" stroke="${str(id)}" stroke-width="1.6"/>`;
     const ff = `font-family="YekanBakh, IranSans, Vazirmatn, Tahoma, sans-serif"`;
     const labels = bare ? "" : `
-      <text x="210" y="26" text-anchor="middle" fill="#ffd0d6" font-size="14" font-weight="700" ${ff}>جلو</text>
-      <text x="210" y="158" text-anchor="middle" fill="#fff5f6" font-size="15" font-weight="700" ${ff} pointer-events="none">کاپوت</text>
-      <text x="210" y="348" text-anchor="middle" fill="#fff5f6" font-size="15" font-weight="700" ${ff} pointer-events="none">سقف</text>
-      <text x="210" y="576" text-anchor="middle" fill="#fff5f6" font-size="15" font-weight="700" ${ff} pointer-events="none">صندوق</text>
-      <text x="210" y="778" text-anchor="middle" fill="#ffd0d6" font-size="14" font-weight="700" ${ff}>عقب</text>
+      <text x="210" y="26" text-anchor="middle" fill="#f48711" font-size="14" font-weight="700" ${ff}>جلو</text>
+      <text x="210" y="158" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700" ${ff} pointer-events="none">کاپوت</text>
+      <text x="210" y="348" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700" ${ff} pointer-events="none">سقف</text>
+      <text x="210" y="576" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="700" ${ff} pointer-events="none">صندوق</text>
+      <text x="210" y="778" text-anchor="middle" fill="#f48711" font-size="14" font-weight="700" ${ff}>عقب</text>
       <rect x="8" y="318" width="28" height="168" rx="10" fill="rgba(22,6,10,.72)" stroke="rgba(255,208,214,.28)"/>
-      <text x="22" y="402" text-anchor="middle" fill="#ffd0d6" font-size="13" font-weight="700" ${ff} transform="rotate(-90 22 402)" pointer-events="none">سمت راننده</text>
+      <text x="22" y="402" text-anchor="middle" fill="#f48711" font-size="13" font-weight="700" ${ff} transform="rotate(-90 22 402)" pointer-events="none">سمت راننده</text>
       <rect x="384" y="318" width="28" height="168" rx="10" fill="rgba(22,6,10,.72)" stroke="rgba(255,208,214,.28)"/>
-      <text x="398" y="402" text-anchor="middle" fill="#ffd0d6" font-size="13" font-weight="700" ${ff} transform="rotate(90 398 402)" pointer-events="none">سمت شاگرد</text>
+      <text x="398" y="402" text-anchor="middle" fill="#f48711" font-size="13" font-weight="700" ${ff} transform="rotate(90 398 402)" pointer-events="none">سمت شاگرد</text>
     `;
 
     return `
@@ -387,7 +387,7 @@
           <stop offset="0" stop-color="#9bb4c9" stop-opacity=".35"/>
           <stop offset="1" stop-color="#6a8094" stop-opacity=".18"/>
         </linearGradient>
-        <filter id="${uid_}-glow"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#e0566a" flood-opacity=".55"/></filter>
+        <filter id="${uid_}-glow"><feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#0b989c" flood-opacity=".55"/></filter>
       </defs>
       <rect x="68" y="122" width="22" height="70" rx="10" fill="#16161a" stroke="#3a3a42"/>
       <rect x="330" y="122" width="22" height="70" rx="10" fill="#16161a" stroke="#3a3a42"/>

@@ -27,7 +27,7 @@
   };
 
   const STAT = {
-    ok: { label: "سالم", color: "#2a3140", stroke: "rgba(255,208,214,.35)" },
+    ok: { label: "سالم", color: "#2a3140", stroke: "rgba(11,152,156,.45)" },
     pdr: { label: "صافکاری", color: "#c9b15a", stroke: "#e8d48b" },
     spot: { label: "رنگ جزئی", color: "#c9843a", stroke: "#e8a04a" },
     paint: { label: "رنگ‌شده", color: "#b4533c", stroke: "#e07a62" },
@@ -167,17 +167,17 @@
     <svg class="pmap-svg" viewBox="0 0 420 900" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="pg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#ffd0d6" stop-opacity=".16"/>
-          <stop offset="1" stop-color="#8b1024" stop-opacity=".08"/>
+          <stop offset="0" stop-color="#f48711" stop-opacity=".16"/>
+          <stop offset="1" stop-color="#0b989c" stop-opacity=".08"/>
         </linearGradient>
         <linearGradient id="pglass" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#c5d8ea" stop-opacity=".45"/>
           <stop offset="1" stop-color="#6b8498" stop-opacity=".18"/>
         </linearGradient>
-        <filter id="pglow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#e0566a" flood-opacity=".55"/></filter>
+        <filter id="pglow"><feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#0b989c" flood-opacity=".55"/></filter>
       </defs>
-      <ellipse cx="210" cy="860" rx="150" ry="16" fill="#8b1024" opacity=".18"/>
-      <text x="210" y="36" text-anchor="middle" fill="#ffd0d6" font-size="14" font-weight="700" font-family="YekanBakh, IranSans, Vazirmatn, Tahoma, sans-serif">جلو</text>
+      <ellipse cx="210" cy="860" rx="150" ry="16" fill="#0b989c" opacity=".18"/>
+      <text x="210" y="36" text-anchor="middle" fill="#f48711" font-size="14" font-weight="700" font-family="YekanBakh, IranSans, Vazirmatn, Tahoma, sans-serif">جلو</text>
       <rect x="52" y="148" width="24" height="86" rx="12" fill="#111014" stroke="#3a3336"/>
       <rect x="344" y="148" width="24" height="86" rx="12" fill="#111014" stroke="#3a3336"/>
       <rect x="52" y="598" width="24" height="86" rx="12" fill="#111014" stroke="#3a3336"/>
@@ -199,10 +199,10 @@
       ${P("rrf", "M334 610 C322 598 296 602 290 620 L298 732 C326 726 342 690 340 650 Z")}
       ${P("trunk", "M140 564 C180 552 240 552 280 564 L272 730 C232 744 188 744 148 730 Z")}
       ${P("rbump", "M126 732 C170 754 250 754 294 732 L282 768 C240 784 180 784 138 768 Z")}
-      <text x="210" y="190" text-anchor="middle" fill="#fff5f6" font-size="13" pointer-events="none">کاپوت</text>
-      <text x="210" y="420" text-anchor="middle" fill="#fff5f6" font-size="13" pointer-events="none">سقف</text>
-      <text x="210" y="660" text-anchor="middle" fill="#fff5f6" font-size="13" pointer-events="none">صندوق</text>
-      <text x="210" y="888" text-anchor="middle" fill="#ffd0d6" font-size="13" letter-spacing="4">عقب · REAR</text>
+      <text x="210" y="190" text-anchor="middle" fill="#ffffff" font-size="13" pointer-events="none">کاپوت</text>
+      <text x="210" y="420" text-anchor="middle" fill="#ffffff" font-size="13" pointer-events="none">سقف</text>
+      <text x="210" y="660" text-anchor="middle" fill="#ffffff" font-size="13" pointer-events="none">صندوق</text>
+      <text x="210" y="888" text-anchor="middle" fill="#f48711" font-size="13" letter-spacing="4">عقب · REAR</text>
     </svg>`;
   }
 
@@ -219,10 +219,10 @@
       ${R("frch", 256, 120, 86, 110)}
       ${R("rlch", 78, 640, 86, 110)}
       ${R("rrch", 256, 640, 86, 110)}
-      <text x="121" y="180" text-anchor="middle" fill="#fff5f6" font-size="12" pointer-events="none">شاسی جلو</text>
-      <text x="299" y="180" text-anchor="middle" fill="#fff5f6" font-size="12" pointer-events="none">شاسی جلو</text>
-      <text x="121" y="700" text-anchor="middle" fill="#fff5f6" font-size="12" pointer-events="none">شاسی عقب</text>
-      <text x="299" y="700" text-anchor="middle" fill="#fff5f6" font-size="12" pointer-events="none">شاسی عقب</text>
+      <text x="121" y="180" text-anchor="middle" fill="#ffffff" font-size="12" pointer-events="none">شاسی جلو</text>
+      <text x="299" y="180" text-anchor="middle" fill="#ffffff" font-size="12" pointer-events="none">شاسی جلو</text>
+      <text x="121" y="700" text-anchor="middle" fill="#ffffff" font-size="12" pointer-events="none">شاسی عقب</text>
+      <text x="299" y="700" text-anchor="middle" fill="#ffffff" font-size="12" pointer-events="none">شاسی عقب</text>
     </svg>`;
   }
 
@@ -598,12 +598,12 @@
       c.width = W; c.height = H;
       const ctx = c.getContext("2d");
       const g = ctx.createLinearGradient(0, 0, W, H);
-      g.addColorStop(0, "#1c0a10");
-      g.addColorStop(0.45, "#12060a");
-      g.addColorStop(1, "#2a0c14");
+      g.addColorStop(0, "#081e20");
+      g.addColorStop(0.45, "#041213");
+      g.addColorStop(1, "#0a2628");
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = "#8b1024";
+      ctx.strokeStyle = "#0b989c";
       ctx.lineWidth = 3;
       roundRect(ctx, 28, 24, W - 56, H - 48, 22);
       ctx.stroke();
@@ -611,7 +611,7 @@
       ctx.lineWidth = 1;
       roundRect(ctx, 42, 38, W - 84, H - 76, 16);
       ctx.stroke();
-      ctx.fillStyle = "rgba(139,16,36,0.22)";
+      ctx.fillStyle = "rgba(11,152,156,0.22)";
       ctx.beginPath(); ctx.arc(150, 120, 180, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = "rgba(232,196,122,0.06)";
       ctx.beginPath(); ctx.arc(1480, 820, 220, 0, Math.PI * 2); ctx.fill();
@@ -678,7 +678,7 @@
       };
 
       ctx.save();
-      ctx.fillStyle = "#ffd0d6";
+      ctx.fillStyle = "#f48711";
       ctx.font = "700 17px YekanBakh, IranSans, sans-serif";
       ctx.textAlign = "center";
       ctx.translate(mapBox.x + 22, mapBox.y + mapBox.h / 2);
@@ -686,7 +686,7 @@
       ctx.fillText("سمت راننده", 0, 0);
       ctx.restore();
       ctx.save();
-      ctx.fillStyle = "#ffd0d6";
+      ctx.fillStyle = "#f48711";
       ctx.font = "700 17px YekanBakh, IranSans, sans-serif";
       ctx.textAlign = "center";
       ctx.translate(mapBox.x + mapBox.w - 22, mapBox.y + mapBox.h / 2);
@@ -694,7 +694,7 @@
       ctx.fillText("سمت شاگرد", 0, 0);
       ctx.restore();
 
-      ctx.fillStyle = "#ffd0d6";
+      ctx.fillStyle = "#f48711";
       ctx.font = "700 15px YekanBakh, IranSans, sans-serif";
       ctx.textAlign = "center";
       ctx.fillText("جلو", mapBox.x + mapBox.w / 2, mapBox.y + 24);
@@ -737,7 +737,7 @@
         ctx.fillStyle = "#e8c47a";
         ctx.font = (big ? "700 16px" : "600 15px") + " IranSans, YekanBakh, sans-serif";
         ctx.fillText(row[0], colR - 16, y + 5);
-        ctx.fillStyle = "#fff5f6";
+        ctx.fillStyle = "#ffffff";
         ctx.font = (big ? "700 24px" : "500 18px") + " YekanBakh, IranSans, sans-serif";
         fitText(ctx, String(row[1]), colR - 200, y + 5, colR - colL - 230, "right");
       });
@@ -756,7 +756,7 @@
 
       ctx.font = "500 16px IranSans, YekanBakh, sans-serif";
       if (!marks.length) {
-        ctx.fillStyle = "#fff5f6";
+        ctx.fillStyle = "#ffffff";
         ctx.fillText("تمام قطعات سالم اعلام شده است", colR - 20, marksTop + 68);
       } else {
         let x = colR - 20, y = marksTop + 68;
@@ -771,7 +771,7 @@
           roundRect(ctx, x - tw, y - 22, tw, 34, 10); ctx.fill();
           ctx.strokeStyle = "rgba(232,196,122,0.28)";
           ctx.stroke();
-          ctx.fillStyle = "#fff5f6";
+          ctx.fillStyle = "#ffffff";
           ctx.textAlign = "right";
           fitText(ctx, label, x - 12, y + 2, tw - 20, "right");
           x -= tw + 10;
@@ -823,7 +823,7 @@
 
     Promise.all([
       loadCertFonts(),
-      loadImg("images/logo.png?v=52"),
+      loadImg("images/logo.png?v=64"),
       mapSvg ? loadImg("data:image/svg+xml;charset=utf-8," + encodeURIComponent(mapSvg)) : Promise.resolve(null)
     ]).then(([, logo, map]) => drawLux(map, logo)).catch(() => drawLux(null, null));
   }
