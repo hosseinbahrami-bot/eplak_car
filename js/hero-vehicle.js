@@ -1,19 +1,14 @@
 /**
  * Eplakcar - Master Ultra-Realistic Hero Vehicle Stage
  *  - 100% Identical studio background with glowing Eplakcar logo on the back wall
- *  - 3 Vibrant cheerful vehicles on the central turntable:
- *      * Car: Vibrant Sunset Orange Porsche 911 GT3 RS
- *      * Motor: Vibrant Rosso Corsa Red Ducati Panigale V4 S
- *      * Truck: 2024 Modern European Scania V8 770S Cab-Over Heavy Tractor (Teal & Chrome)
- *  - Headlight optics strictly and exclusively inside the physical glass lenses
- *  - Separated gas/throttle vs headlights:
- *      * Pressing gas ONLY revs the engine & exhausts smoke (headlights do NOT flash!)
- *      * Press & hold gas (نگه داشتن پدال): revs to redline and hits rev limiter (کاتاف / limiter bounce)!
- *      * Headlights flash double high-beam ONLY when requested (tab switch or flash button)
- *  - Clean, warm, noise-free Web Audio engines (Zero harsh buzz/hiss):
- *      * Car: Smooth throaty Boxer-6 sports car purr with sports limiter bounce
- *      * Motor: Crisp, high-pitched superbike cadence with rapid racing limiter bounce
- *      * Truck: Deep, heavy, soothing low-bass diesel rumble with air brake hiss on release
+ *  - 3 Authentic Vehicles on the central turntable:
+ *      * Car: Porsche 911 GT3 RS
+ *      * Motor: Honda CB1300 Super Four (White-Red)
+ *      * Truck: 2024 Scania V8 770S Cab-Over Heavy Tractor (Teal & Chrome)
+ *  - Headlight optics strictly and exclusively inside physical glass lenses
+ *  - Guaranteed Image-First Headlights: Image completely renders and displays before any high-beam flash
+ *  - Interactive Cockpit Speedometer / Gauge Cluster (صفحه کیلومتر و دور موتور هوشمند)
+ *  - Authentic Engine Starter Sequence (استارت کرانک -> روشن شدن -> آیدل و کاتاف)
  */
 
 (function (window) {
@@ -26,8 +21,8 @@
       name: 'پورشه 911 GT3 RS مدل ۲۰۲۴',
       category: 'سوپراسپرت‌های صفر و کلکسیونی',
       specs: 'موتور ۴ لیتری تخت تنفس‌طبیعی · ۵۲۵ اسب بخار · ۹,۰۰۰ دور',
-      image: 'images/car-hero.jpg?v=30',
-      audioBtnLabel: 'صدای پورشه GT3',
+      image: 'images/car-hero.jpg?v=35',
+      audioBtnLabel: 'استارت پورشه 911',
       idleRpm: 800,
       revRpm: 6800,
       maxRpm: 9200,
@@ -79,45 +74,45 @@
     motor: {
       id: 'motor',
       tabLabel: 'موتور',
-      name: 'دوکاتی Panigale V4 S مدل ۲۰۲۴',
-      category: 'موتورسیکلت‌های مسابقه‌ای و سوپربایک',
-      specs: 'انجین Desmosedici V4 · ۲۱۴ اسب بخار · ۱۴,۵۰۰ دور',
-      image: 'images/motor-hero.jpg?v=30',
-      audioBtnLabel: 'صدای دوکاتی V4',
-      idleRpm: 1350,
-      revRpm: 9500,
-      maxRpm: 14500,
+      name: 'هوندا CB1300 Super Four مدل ۲۰۲۴ (سفید-قرمز)',
+      category: 'موتورسیکلت‌های سنگین استریت و ۴ سیلندر',
+      specs: 'انجین ۱۲۸۴ سی‌سی ۴ سیلندر خطی · ۱۱۴ اسب بخار · گشتاور ۱۱۹ نیوتن‌متر',
+      image: 'images/motor-hero.jpg?v=35',
+      audioBtnLabel: 'استارت هوندا CB1300',
+      idleRpm: 1000,
+      revRpm: 7800,
+      maxRpm: 9600,
       headlights: [
-        { id: 'nose', x: 60.09, y: 46.61, w: 24, h: 10, isStrip: true }
+        { id: 'cb-headlight', x: 60.16, y: 38.02, w: 32, h: 32, isRound: true }
       ],
-      groundGlow: { x: 60.0, y: 68.0, w: 28, h: 14 },
+      groundGlow: { x: 60.16, y: 65.0, w: 26, h: 14 },
       exhaust: {
-        x: 46.0,
-        y: 57.5,
-        angleDeg: 210,
-        speed: 2.6,
-        size: 4.5,
+        x: 37.3,
+        y: 50.8,
+        angleDeg: 215,
+        speed: 2.8,
+        size: 4.8,
         growRate: 0.6,
         maxAge: 55,
         buoyancy: 0.045
       },
       searchFields: {
-        qPlaceholder: 'برند یا مدل موتور (دوکاتی، کاوازاکی، یاماها، وسپا…)',
+        qPlaceholder: 'برند یا مدل موتور (هوندا CB1300، یاماها، کاوازاکی، وسپا…)',
         f1Label: 'حجم انجین',
         f1Name: 'volume',
         f1Options: [
           { val: '', label: 'همه حجم‌ها' },
           { val: '250', label: 'تا ۲۵۰ سی‌سی (پلاک ملی)' },
           { val: '600', label: '۳۰۰ تا ۶۵۰ سی‌سی' },
-          { val: '1000', label: '۱۰۰۰ سی‌سی به بالا' }
+          { val: '1000', label: '۱۰۰۰ سی‌سی به بالا (CB1300)' }
         ],
         f2Label: 'کلاس موتور',
         f2Name: 'class',
         f2Options: [
           { val: '', label: 'همه کلاس‌ها' },
-          { val: 'superbike', label: 'ریس (Superbike)' },
-          { val: 'naked', label: 'نیکد و استریت' },
-          { val: 'adventure', label: 'ادونچر و تورینگ' },
+          { val: 'naked', label: 'استریت و نیکد (CB1300)' },
+          { val: 'superbike', label: 'ریس و اسپرت' },
+          { val: 'touring', label: 'تورینگ و مسافرتی' },
           { val: 'scooter', label: 'اسکوتر شهری' }
         ],
         f3Label: 'بودجه تا',
@@ -138,12 +133,11 @@
       name: 'کشنده اسکانیا V8 770S سوپر لاین ۲۰۲۴',
       category: 'کشنده‌های فوق‌مدرن اروپایی',
       specs: 'V8 توربودیزل ۱۶٫۴ لیتری · ۷۷۰ اسب بخار · ۳۷۰۰ نیوتن‌متر',
-      image: 'images/truck-hero.jpg?v=30',
-      audioBtnLabel: 'صدای دیزل اسکانیا',
+      image: 'images/truck-hero.jpg?v=35',
+      audioBtnLabel: 'استارت دیزل اسکانیا',
       idleRpm: 600,
       revRpm: 2100,
       maxRpm: 2500,
-      // Strictly the two bumper headlights of the modern Scania
       headlights: [
         { id: 'bump-l', x: 34.61, y: 59.10, w: 26, h: 13, isProjector: true },
         { id: 'bump-r', x: 47.18, y: 59.89, w: 28, h: 13, isProjector: true }
@@ -151,7 +145,7 @@
       groundGlow: { x: 41.0, y: 73.5, w: 34, h: 16 },
       exhaust: {
         x: 58.24,
-        y: 14.97, // Top opening of vertical chrome smokestack!
+        y: 14.97,
         angleDeg: 260,
         speed: 3.0,
         size: 7,
@@ -160,22 +154,22 @@
         buoyancy: 0.08
       },
       searchFields: {
-        qPlaceholder: 'برند یا کشنده (اسکانیا، ولوو، اکتروس، داف…)',
-        f1Label: 'تیپ کاربری',
-        f1Name: 'heavyType',
+        qPlaceholder: 'برند یا مدل کشنده (اسکانیا، ولوو FH، مرسدس آکتروس، داف…)',
+        f1Label: 'کاربری',
+        f1Name: 'usage',
         f1Options: [
           { val: '', label: 'همه کاربری‌ها' },
-          { val: 'tractor_single', label: 'کشنده تک‌محور (4x2)' },
-          { val: 'tractor_double', label: 'کشنده جفت‌محور (6x4)' },
-          { val: 'dump', label: 'کمپرسی معدنی' },
-          { val: 'cargo', label: 'باری و کفی' }
+          { val: 'tractor', label: 'کشنده جاده‌ای' },
+          { val: 'tipper', label: 'کمپرسی' },
+          { val: 'cargo', label: 'باری و چادری' }
         ],
-        f2Label: 'استاندارد موتور',
-        f2Name: 'emission',
+        f2Label: 'قدرت موتور',
+        f2Name: 'power',
         f2Options: [
-          { val: '', label: 'همه استانداردها' },
-          { val: 'euro6', label: 'یورو ۶ (Euro 6)' },
-          { val: 'euro5', label: 'یورو ۵ (Euro 5)' }
+          { val: '', label: 'همه قدرت‌ها' },
+          { val: '450', label: '۴۵۰ تا ۵۰۰ اسب' },
+          { val: '540', label: '۵۰۰ تا ۶۰۰ اسب' },
+          { val: '700', label: 'بالای ۶۵۰ اسب بخار (V8)' }
         ],
         f3Label: 'بودجه تا',
         f3Name: 'priceMax',
@@ -183,77 +177,87 @@
           { val: '', label: 'آزاد' },
           { val: '5000000000', label: 'تا ۵ میلیارد' },
           { val: '10000000000', label: 'تا ۱۰ میلیارد' },
-          { val: '20000000000', label: 'تا ۲۰ میلیارد' },
-          { val: '35000000000', label: 'تا ۳۵ میلیارد' }
+          { val: '18000000000', label: 'تا ۱۸ میلیارد' },
+          { val: '28000000000', label: 'تا ۲۸ میلیارد' }
         ]
       }
     }
   };
 
-  // Pre-render soft smoke sprite once for GPU blitting
-  let smokeSprite = null;
+  /**
+   * Pre-rendered Realistic Volumetric Smoke Sprite
+   */
+  let cachedSmokeCanvas = null;
   function getSmokeSprite() {
-    if (smokeSprite) return smokeSprite;
-    const c = document.createElement('canvas');
-    const S = 96;
-    c.width = S;
-    c.height = S;
-    const ctx = c.getContext('2d');
-    const g = ctx.createRadialGradient(S / 2, S / 2, 0, S / 2, S / 2, S / 2);
-    g.addColorStop(0, 'rgba(240, 245, 252, 0.72)');
-    g.addColorStop(0.3, 'rgba(220, 230, 242, 0.42)');
-    g.addColorStop(0.7, 'rgba(195, 208, 222, 0.12)');
-    g.addColorStop(1, 'rgba(180, 195, 210, 0)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, S, S);
-    smokeSprite = c;
-    return smokeSprite;
+    if (cachedSmokeCanvas) return cachedSmokeCanvas;
+    const size = 64;
+    const can = document.createElement('canvas');
+    can.width = size;
+    can.height = size;
+    const ctx = can.getContext('2d');
+
+    const grad = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    grad.addColorStop(0, 'rgba(235, 245, 255, 0.48)');
+    grad.addColorStop(0.35, 'rgba(180, 205, 220, 0.28)');
+    grad.addColorStop(0.7, 'rgba(120, 150, 170, 0.10)');
+    grad.addColorStop(1, 'rgba(100, 130, 150, 0)');
+
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.fill();
+
+    cachedSmokeCanvas = can;
+    return can;
   }
 
   /**
-   * Physics Smoke Particle
+   * Smoke Particle
    */
   class SmokeParticle {
-    constructor(x, y, cfg, isRev) {
-      this.x = x + (Math.random() - 0.5) * (isRev ? 8 : 3);
-      this.y = y + (Math.random() - 0.5) * (isRev ? 8 : 3);
-
-      const spd = (cfg.speed || 2.4) * (isRev ? 1.7 : 1.0) * (0.85 + Math.random() * 0.3);
-      const rad = ((cfg.angleDeg || 0) + (Math.random() - 0.5) * (isRev ? 30 : 16)) * (Math.PI / 180);
-      this.vx = Math.cos(rad) * spd;
-      this.vy = Math.sin(rad) * spd;
-
-      this.size = (cfg.size || 5) * (isRev ? 1.5 : 1.0) * (0.85 + Math.random() * 0.3);
-      this.growRate = (cfg.growRate || 0.8) * (isRev ? 1.3 : 1.0);
-      this.alpha = isRev ? 0.6 : 0.36;
-      this.initialAlpha = this.alpha;
+    constructor(emitX, emitY, exhaustCfg, isBurst = false) {
+      this.x = emitX + (Math.random() - 0.5) * 4;
+      this.y = emitY + (Math.random() - 0.5) * 4;
+      const angleRad = (exhaustCfg.angleDeg + (Math.random() - 0.5) * 25) * (Math.PI / 180);
+      const spd = exhaustCfg.speed * (isBurst ? (1.5 + Math.random() * 0.9) : (0.8 + Math.random() * 0.5));
+      this.vx = Math.cos(angleRad) * spd;
+      this.vy = Math.sin(angleRad) * spd;
+      this.size = exhaustCfg.size * (isBurst ? 1.4 : 1.0) * (0.8 + Math.random() * 0.4);
+      this.growRate = exhaustCfg.growRate * (0.8 + Math.random() * 0.5);
       this.age = 0;
-      this.maxAge = (cfg.maxAge || 60) * (0.85 + Math.random() * 0.3);
-      this.buoyancy = cfg.buoyancy || 0.04;
-      this.turbulence = (Math.random() - 0.5) * 0.06;
+      this.maxAge = exhaustCfg.maxAge * (0.85 + Math.random() * 0.4);
+      this.alpha = isBurst ? 0.65 : 0.42;
+      this.buoyancy = exhaustCfg.buoyancy || 0.04;
+      this.rot = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.04;
     }
 
     update() {
+      this.age++;
       this.x += this.vx;
       this.y += this.vy;
       this.vy -= this.buoyancy;
-      this.vx += this.turbulence;
+      this.vx *= 0.98;
+      this.vy *= 0.98;
       this.size += this.growRate;
-      this.age++;
+      this.rot += this.rotSpeed;
 
-      const p = this.age / this.maxAge;
-      if (p < 0.15) {
-        this.alpha = this.initialAlpha * (p / 0.15);
+      const progress = this.age / this.maxAge;
+      if (progress < 0.2) {
+        this.currentAlpha = this.alpha * (progress / 0.2);
       } else {
-        this.alpha = this.initialAlpha * Math.pow(1 - p, 1.35);
+        this.currentAlpha = this.alpha * (1 - (progress - 0.2) / 0.8);
       }
     }
 
     draw(ctx, sprite) {
-      if (this.alpha <= 0.01 || this.size <= 0.5) return;
-      ctx.globalAlpha = this.alpha;
-      const d = this.size * 2;
-      ctx.drawImage(sprite, this.x - this.size, this.y - this.size, d, d);
+      if (this.currentAlpha <= 0.01) return;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, Math.min(1, this.currentAlpha));
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rot);
+      ctx.drawImage(sprite, -this.size / 2, -this.size / 2, this.size, this.size);
+      ctx.restore();
     }
 
     isDead() {
@@ -262,12 +266,7 @@
   }
 
   /**
-   * Authentic Real-Sample Vehicle Audio Engine
-   * Utilizes real recorded PCM acoustic waveforms for:
-   *  - Car: Real naturally-aspirated high-performance sports engine (idle + full-throttle rev)
-   *  - Motor: Real high-cadence racing motorcycle engine (idle + racing rev)
-   *  - Truck: Real Scania V8 diesel combustion rumble (idle + heavy load rev + pneumatic air-brake hiss)
-   * Real-time dual-track crossfading, dynamic RPM playbackRate scaling, and authentic limiter bounce (کاتاف).
+   * Authentic Vehicle Audio Engine with Starter Ignition Support
    */
   class VehicleAudioEngine {
     constructor() {
@@ -279,9 +278,10 @@
       this.revGain = null;
       this.idleSource = null;
       this.revSource = null;
+      this.starterSource = null;
       this.limiterPulse = false;
       this.decodedBuffers = {};
-      this.currentGeneration = 0; // Guard against rapid async tab switching
+      this.currentGeneration = 0;
       this.baseRates = {
         car: 1.0,
         motor: 1.0,
@@ -322,7 +322,20 @@
       }
     }
 
-    async start(type) {
+    // Preload all assets in memory for 0ms lag
+    preload(type) {
+      this.init();
+      if (!this.ctx) return;
+      const starterKey = type === 'car' ? 'car_start' : (type === 'motor' ? 'motor_start' : 'truck_start');
+      const idleKey = type === 'car' ? 'car_idle' : (type === 'motor' ? 'motor_idle' : 'truck_idle');
+      const revKey = type === 'car' ? 'car_rev' : (type === 'motor' ? 'motor_rev' : 'truck_rev');
+      this._getBuffer(starterKey);
+      this._getBuffer(idleKey);
+      this._getBuffer(revKey);
+    }
+
+    // Authentic Engine Starter Sequence
+    async startWithStarter(type, onEngineCaught) {
       this.init();
       if (!this.ctx) return;
       if (this.ctx.state === 'suspended') {
@@ -334,28 +347,81 @@
       this.isPlaying = true;
       const gen = ++this.currentGeneration;
 
+      const starterKey = type === 'car' ? 'car_start' : (type === 'motor' ? 'motor_start' : 'truck_start');
+      const idleKey = type === 'car' ? 'car_idle' : (type === 'motor' ? 'motor_idle' : 'truck_idle');
+      const revKey = type === 'car' ? 'car_rev' : (type === 'motor' ? 'motor_rev' : 'truck_rev');
+
+      // Concurrently ensure starter and loop buffers
+      const [startBuf, idleBuf, revBuf] = await Promise.all([
+        this._getBuffer(starterKey),
+        this._getBuffer(idleKey),
+        this._getBuffer(revKey)
+      ]);
+
+      if (!this.isPlaying || this.currentGeneration !== gen) return;
+
       const now = this.ctx.currentTime;
       this.masterGain = this.ctx.createGain();
-      this.masterGain.gain.setValueAtTime(0.001, now);
-      this.masterGain.gain.linearRampToValueAtTime(0.38, now + 0.18);
+      this.masterGain.gain.setValueAtTime(0.42, now);
       this.masterGain.connect(this.ctx.destination);
+
+      // Play starter cranking audio
+      if (startBuf) {
+        this.starterSource = this.ctx.createBufferSource();
+        this.starterSource.buffer = startBuf;
+        this.starterSource.connect(this.masterGain);
+        this.starterSource.start(now);
+      }
+
+      const starterDuration = startBuf ? startBuf.duration : 2.0;
+      // Overlap point where engine catches fire and settles into idle
+      const catchDelayMs = Math.max(150, Math.floor((starterDuration - 0.4) * 1000));
+
+      setTimeout(() => {
+        if (!this.isPlaying || this.currentGeneration !== gen) return;
+        this._startLoopTracks(idleBuf, revBuf, type);
+        if (onEngineCaught) onEngineCaught();
+      }, catchDelayMs);
+    }
+
+    // Direct loop start (for seamless switching while already running)
+    async startDirect(type) {
+      this.init();
+      if (!this.ctx) return;
+      if (this.ctx.state === 'suspended') {
+        try { await this.ctx.resume(); } catch (_) {}
+      }
+
+      this.stop();
+      this.activeType = type;
+      this.isPlaying = true;
+      const gen = ++this.currentGeneration;
 
       const idleKey = type === 'car' ? 'car_idle' : (type === 'motor' ? 'motor_idle' : 'truck_idle');
       const revKey = type === 'car' ? 'car_rev' : (type === 'motor' ? 'motor_rev' : 'truck_rev');
 
-      // Preload & decode both idle and rev samples
       const [idleBuf, revBuf] = await Promise.all([
         this._getBuffer(idleKey),
         this._getBuffer(revKey)
       ]);
 
-      // If user switched vehicle or turned off audio while loading, abort
-      if (!this.isPlaying || !this.ctx || this.currentGeneration !== gen) return;
+      if (!this.isPlaying || this.currentGeneration !== gen) return;
 
+      const now = this.ctx.currentTime;
+      this.masterGain = this.ctx.createGain();
+      this.masterGain.gain.setValueAtTime(0.01, now);
+      this.masterGain.gain.linearRampToValueAtTime(0.40, now + 0.15);
+      this.masterGain.connect(this.ctx.destination);
+
+      this._startLoopTracks(idleBuf, revBuf, type);
+    }
+
+    _startLoopTracks(idleBuf, revBuf, type) {
+      if (!this.ctx || !this.isPlaying || !this.masterGain) return;
       const baseRate = this.baseRates[type] || 1.0;
       const playTime = this.ctx.currentTime;
 
-      // 1. Authentic Idle Combustion Track
+      // 1. Idle Combustion Loop
       if (idleBuf) {
         this.idleGain = this.ctx.createGain();
         this.idleGain.gain.setValueAtTime(1.0, playTime);
@@ -370,7 +436,7 @@
         this.idleSource.start(playTime);
       }
 
-      // 2. Authentic Rev / Load Exhaust Roar Track
+      // 2. Rev / Load Exhaust Roar Loop
       if (revBuf) {
         this.revGain = this.ctx.createGain();
         this.revGain.gain.setValueAtTime(0.001, playTime);
@@ -386,15 +452,13 @@
       }
     }
 
-    // Set dynamic pitch & crossfade during throttle ramp
     setThrottlePitch(progress, type) {
       if (!this.isPlaying || !this.ctx) return;
       const now = this.ctx.currentTime;
       const base = this.baseRates[type] || 1.0;
-      const max = this.maxRates[type] || 3.0;
+      const max = this.maxRates[type] || 2.0;
       const targetRate = base + (max - base) * progress;
 
-      // Smoothly update acoustic playback speed (RPM pitch)
       if (this.idleSource) {
         this.idleSource.playbackRate.linearRampToValueAtTime(targetRate, now + 0.05);
       }
@@ -402,7 +466,6 @@
         this.revSource.playbackRate.linearRampToValueAtTime(targetRate, now + 0.05);
       }
 
-      // Dynamic crossfade: idle volume softens while open-throttle rev roars
       if (this.idleGain) {
         const ig = Math.max(0.12, 1.0 - progress * 0.88);
         this.idleGain.gain.linearRampToValueAtTime(ig, now + 0.05);
@@ -413,7 +476,6 @@
       }
     }
 
-    // Rev limiter cut stutter (کاتاف واقعی با تپش سوخت و جرقه‌زنی و بک‌فایر)
     triggerLimiterCut(type) {
       if (!this.isPlaying || !this.ctx || !this.masterGain) return;
       const now = this.ctx.currentTime;
@@ -421,20 +483,17 @@
       const maxRate = this.maxRates[type] || 2.0;
 
       if (this.limiterPulse) {
-        // Fuel Cut-off: momentary volume dip and micro pitch reduction
         this.masterGain.gain.setValueAtTime(0.08, now);
         if (this.idleSource) this.idleSource.playbackRate.setValueAtTime(maxRate * 0.95, now);
         if (this.revSource) this.revSource.playbackRate.setValueAtTime(maxRate * 0.95, now);
       } else {
-        // Combustion Pop / Bang: immediate volume restoration and peak bounce pitch
-        this.masterGain.gain.setValueAtTime(0.44, now);
+        this.masterGain.gain.setValueAtTime(0.46, now);
         if (this.idleSource) this.idleSource.playbackRate.setValueAtTime(maxRate * 1.02, now);
         if (this.revSource) this.revSource.playbackRate.setValueAtTime(maxRate * 1.02, now);
         this._playBackfirePop(type);
       }
     }
 
-    // Authentic exhaust combustion backfire pop on rev limiter
     _playBackfirePop(type) {
       if (!this.isPlaying || !this.ctx) return;
       try {
@@ -462,7 +521,6 @@
       } catch (_) {}
     }
 
-    // Release throttle smoothly back to idle purr
     releaseThrottle(type) {
       if (!this.isPlaying || !this.ctx) return;
       const now = this.ctx.currentTime;
@@ -470,7 +528,7 @@
 
       if (this.masterGain) {
         this.masterGain.gain.cancelScheduledValues(now);
-        this.masterGain.gain.linearRampToValueAtTime(0.38, now + 0.25);
+        this.masterGain.gain.linearRampToValueAtTime(0.40, now + 0.25);
       }
 
       if (this.idleSource) {
@@ -481,25 +539,22 @@
         this.revSource.playbackRate.cancelScheduledValues(now);
         this.revSource.playbackRate.exponentialRampToValueAtTime(base, now + 0.45);
       }
-
       if (this.idleGain) {
         this.idleGain.gain.cancelScheduledValues(now);
-        this.idleGain.gain.linearRampToValueAtTime(1.0, now + 0.35);
+        this.idleGain.gain.linearRampToValueAtTime(1.0, now + 0.45);
       }
       if (this.revGain) {
         this.revGain.gain.cancelScheduledValues(now);
-        this.revGain.gain.linearRampToValueAtTime(0.001, now + 0.35);
+        this.revGain.gain.linearRampToValueAtTime(0.001, now + 0.45);
       }
 
-      // If truck, trigger the authentic recorded Scania pneumatic air-brake release hiss!
       if (type === 'heavy') {
         setTimeout(() => {
           this._playAirBrakeHiss();
-        }, 300);
+        }, 120);
       }
     }
 
-    // Authentic Scania Pneumatic Air-Brake Release Hiss
     async _playAirBrakeHiss() {
       if (!this.isPlaying || !this.ctx) return;
       try {
@@ -522,7 +577,7 @@
     }
 
     stop() {
-      if (!this.isPlaying && !this.idleSource && !this.revSource) return;
+      if (!this.isPlaying && !this.idleSource && !this.revSource && !this.starterSource) return;
       this.isPlaying = false;
       this.currentGeneration++;
 
@@ -530,10 +585,15 @@
         if (this.masterGain && this.ctx) {
           const now = this.ctx.currentTime;
           this.masterGain.gain.cancelScheduledValues(now);
-          this.masterGain.gain.linearRampToValueAtTime(0.001, now + 0.1);
+          this.masterGain.gain.linearRampToValueAtTime(0.001, now + 0.15);
         }
         setTimeout(() => {
           try {
+            if (this.starterSource) {
+              this.starterSource.stop();
+              this.starterSource.disconnect();
+              this.starterSource = null;
+            }
             if (this.idleSource) {
               this.idleSource.stop();
               this.idleSource.disconnect();
@@ -545,7 +605,7 @@
               this.revSource = null;
             }
           } catch (_) {}
-        }, 120);
+        }, 160);
       } catch (_) {}
     }
   }
@@ -566,8 +626,16 @@
       this.throttleTimer = null;
       this.limiterTimer = null;
       this.audio = new VehicleAudioEngine();
-      this.audioEnabled = false;
-      this.rpmVal = 800;
+
+      // Engine & Gauge State
+      this.isEngineRunning = false;
+      this.isStarting = false;
+      this.isGaugeSweeping = false;
+      this.currentRpm = 0;
+      this.targetRpm = 0;
+      this.currentSpeed = 0;
+      this.targetSpeed = 0;
+
       this.smokeSprite = getSmokeSprite();
       this.cssW = 600;
       this.cssH = 350;
@@ -589,7 +657,12 @@
         window.addEventListener('resize', this._onResize);
       }
 
-      // Event attachments
+      // Preload audio files
+      this.audio.preload('car');
+      this.audio.preload('motor');
+      this.audio.preload('heavy');
+
+      // Double Flash Button
       const flashBtn = document.getElementById('vehFlashBtn');
       if (flashBtn) {
         flashBtn.onclick = (e) => {
@@ -622,14 +695,16 @@
         };
       }
 
+      // Push-to-Start Button
       const audioBtn = document.getElementById('vehAudioBtn');
       if (audioBtn) {
         audioBtn.onclick = (e) => {
           e.preventDefault();
-          this.toggleAudio(audioBtn);
+          this.toggleEngineStart(audioBtn);
         };
       }
 
+      // Click vehicle image for headlights double flash
       const stageClickable = document.getElementById('vehInteractiveArea');
       if (stageClickable) {
         stageClickable.onclick = (e) => {
@@ -639,9 +714,9 @@
         };
       }
 
-      // Start Smoke Loop
+      // Initialize Main Animation & Cluster Render Loop
       if (this.animId) cancelAnimationFrame(this.animId);
-      this.startSmokeLoop();
+      this.startMainLoop();
     }
 
     resizeCanvas() {
@@ -657,80 +732,98 @@
       this.cssH = h;
     }
 
-    switchVehicle(type, isInitial = false) {
-      // If user was throttling, stop immediately
+    /**
+     * GUARANTEED IMAGE-FIRST VEHICLE SWITCH:
+     * 1. Wipes previous headlights completely
+     * 2. Pre-decodes new image in RAM
+     * 3. Sets image source and awaits double requestAnimationFrame compositor paint
+     * 4. Renders headlights in low beam
+     * 5. Pauses 350ms so user clearly sees the car on stage
+     * 6. Double high-beam flash fires!
+     */
+    async switchVehicle(type, isInitial = false) {
       if (this.isThrottling) this.stopThrottle();
 
       const cfg = VEHICLE_CONFIGS[type];
       if (!cfg) return;
       this.activeType = type;
-      this.rpmVal = cfg.idleRpm;
 
       const img = document.getElementById('vehMainImg');
-      const modelNameEl = document.getElementById('vehModelName');
-      const specsEl = document.getElementById('vehSpecs');
       const lightsLayer = document.getElementById('vehHeadlightsLayer');
       const groundGlow = document.getElementById('vehGroundGlow');
-      const audioBtn = document.getElementById('vehAudioBtn');
+      const modelNameEl = document.getElementById('vehModelName');
+      const specsEl = document.getElementById('vehSpecs');
+      const stage = document.getElementById('heroVehicleStage');
 
-      if (modelNameEl) modelNameEl.textContent = cfg.name;
-      if (specsEl) specsEl.textContent = cfg.specs;
-
-      // 1. Immediately wipe previous headlights & ground glow to avoid premature flashing
-      if (lightsLayer) lightsLayer.innerHTML = '';
+      // 1. Immediately wipe previous headlights, glow, and any running flash animation
+      if (stage) stage.classList.remove('double-flash-active');
+      if (lightsLayer) {
+        lightsLayer.innerHTML = '';
+        lightsLayer.style.opacity = '0';
+      }
       if (groundGlow) groundGlow.style.opacity = '0';
 
-      let applied = false;
-      const applyNewVehicle = () => {
-        if (applied) return;
-        applied = true;
-        if (lightsLayer) {
-          lightsLayer.innerHTML = this.renderHeadlightsHtml(cfg);
-        }
-        if (groundGlow) {
-          groundGlow.style.left = `${cfg.groundGlow.x}%`;
-          groundGlow.style.top = `${cfg.groundGlow.y}%`;
-          groundGlow.style.width = `${cfg.groundGlow.w}%`;
-          groundGlow.style.height = `${cfg.groundGlow.h}%`;
-          groundGlow.style.opacity = '';
-        }
-        // Trigger high-beam double flash ONLY after the vehicle image has loaded and is cleanly displayed!
-        setTimeout(() => {
-          this.triggerDoubleFlash();
-        }, isInitial ? 180 : 120);
-      };
-
-      if (img) {
-        img.src = cfg.image;
-        if (img.complete) {
-          applyNewVehicle();
+      // 2. Pre-decode the new vehicle image completely in memory before touching the DOM
+      const preImg = new Image();
+      preImg.src = cfg.image;
+      try {
+        if (preImg.decode) {
+          await preImg.decode();
         } else {
-          img.onload = () => applyNewVehicle();
-          img.onerror = () => applyNewVehicle();
-          setTimeout(applyNewVehicle, 80); // Safety fail-safe guaranteed execution
+          await new Promise((res) => { preImg.onload = res; preImg.onerror = res; });
         }
-      } else {
-        applyNewVehicle();
+      } catch (_) {}
+
+      // Guard if user clicked away to another tab in the meantime
+      if (this.activeType !== type) return;
+
+      // 3. Update DOM texts and image
+      if (modelNameEl) modelNameEl.textContent = cfg.name;
+      if (specsEl) specsEl.textContent = cfg.specs;
+      if (img) img.src = cfg.image;
+
+      // 4. Force browser paint cycle to ensure image is 100% visible on screen
+      await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      if (this.activeType !== type) return;
+
+      // 5. Render headlights & ground glow
+      if (lightsLayer) {
+        lightsLayer.innerHTML = this.renderHeadlightsHtml(cfg);
+        lightsLayer.style.opacity = '1';
+      }
+      if (groundGlow) {
+        groundGlow.style.left = `${cfg.groundGlow.x}%`;
+        groundGlow.style.top = `${cfg.groundGlow.y}%`;
+        groundGlow.style.width = `${cfg.groundGlow.w}%`;
+        groundGlow.style.height = `${cfg.groundGlow.h}%`;
+        groundGlow.style.opacity = '1';
       }
 
-      // Switch audio engine if active
-      if (this.audioEnabled) {
-        this.audio.start(type);
-      }
-      if (audioBtn) {
-        const lbl = audioBtn.querySelector('.btn-lbl');
-        if (lbl) {
-          lbl.textContent = this.audioEnabled ? `${cfg.audioBtnLabel}: روشن` : cfg.audioBtnLabel;
-        }
+      // Update button label
+      this.updateAudioButtonUi();
+
+      // If engine was already running, transition audio smoothly
+      if (this.isEngineRunning) {
+        this.audio.startDirect(type);
+        this.targetRpm = cfg.idleRpm;
+      } else {
+        this.targetRpm = 0;
       }
 
       this.updateSearchFields(cfg);
+
+      // 6. ONLY AFTER image is visibly rendered and settled: Double Flash
+      setTimeout(() => {
+        if (this.activeType === type) {
+          this.triggerDoubleFlash();
+        }
+      }, isInitial ? 480 : 340);
     }
 
     renderHeadlightsHtml(cfg) {
       let html = '';
       cfg.headlights.forEach((hl) => {
-        const shapeClass = hl.isStrip ? 'strip-lens' : 'projector-lens';
+        const shapeClass = hl.isStrip ? 'strip-lens' : (hl.isRound ? 'round-lens' : 'projector-lens');
         html += `
           <div class="headlight-lens ${shapeClass}" style="left:${hl.x}%; top:${hl.y}%; width:${hl.w}px; height:${hl.h}px;">
             <div class="lamp-crystal-core"></div>
@@ -740,7 +833,6 @@
       return html;
     }
 
-    // Double high beam flash (CALLED ONLY BY TAB SWITCH OR FLASH BUTTON, NEVER BY GAS!)
     triggerDoubleFlash() {
       if (this.isFlashing) return;
       this.isFlashing = true;
@@ -758,20 +850,137 @@
       }, 580);
     }
 
-    // START THROTTLE (گاز دادن و نگه داشتن پدال تا کاتاف)
-    startThrottle() {
-      if (this.isThrottling) return;
+    /**
+     * Engine Push-to-Start Sequence (استارت پیشرانه)
+     */
+    async toggleEngineStart(btn) {
+      if (this.isStarting) return;
+
+      if (this.isEngineRunning) {
+        // Stop Engine
+        this.stopEngine();
+      } else {
+        // Start Engine with authentic starter crank
+        await this.startEngineSequence();
+      }
+    }
+
+    async startEngineSequence() {
+      if (this.isStarting || this.isEngineRunning) return;
+      this.isStarting = true;
+      const cfg = VEHICLE_CONFIGS[this.activeType];
+
+      const btn = document.getElementById('vehAudioBtn');
+      const cluster = document.getElementById('vehGaugeCluster');
+      if (btn) {
+        btn.classList.add('is-starting');
+        btn.classList.remove('engine-running');
+        const lbl = btn.querySelector('.btn-lbl');
+        if (lbl) lbl.textContent = 'در حال استارت...';
+      }
+      if (cluster) {
+        cluster.classList.add('is-running');
+      }
+
+      // 1. Cockpit Gauge Sweep (تست عقربه سوییچ)
+      this.isGaugeSweeping = true;
+      const startTime = performance.now();
+      const sweepDuration = 1800; // 1.8s sweep
+
+      const runSweep = (now) => {
+        if (!this.isGaugeSweeping) return;
+        const elapsed = now - startTime;
+        const progress = Math.min(1.0, elapsed / sweepDuration);
+
+        if (progress < 0.45) {
+          // 0 to Max Redline sweep
+          const p = progress / 0.45;
+          this.currentRpm = (cfg ? cfg.maxRpm : 9000) * Math.sin(p * Math.PI / 2);
+          this.currentSpeed = Math.floor(25 * p);
+        } else if (progress < 0.75) {
+          // Drop back to 0
+          const p = (progress - 0.45) / 0.3;
+          this.currentRpm = (cfg ? cfg.maxRpm : 9000) * (1 - p);
+          this.currentSpeed = Math.floor(25 * (1 - p));
+        } else {
+          // Blip to initial idle
+          const p = (progress - 0.75) / 0.25;
+          this.currentRpm = (cfg ? cfg.idleRpm : 800) * p;
+          this.currentSpeed = 0;
+        }
+
+        if (progress < 1.0) {
+          requestAnimationFrame(runSweep);
+        } else {
+          this.isGaugeSweeping = false;
+        }
+      };
+      requestAnimationFrame(runSweep);
+
+      // 2. Play Starter Cranking Sound
+      await this.audio.startWithStarter(this.activeType, () => {
+        // Engine Caught & Running!
+        this.isStarting = false;
+        this.isEngineRunning = true;
+        this.targetRpm = cfg.idleRpm;
+        this.targetSpeed = 0;
+        this.updateAudioButtonUi();
+      });
+    }
+
+    stopEngine() {
+      this.isEngineRunning = false;
+      this.isStarting = false;
+      this.isGaugeSweeping = false;
+      this.targetRpm = 0;
+      this.targetSpeed = 0;
+
+      this.audio.stop();
+      this.updateAudioButtonUi();
+
+      const cluster = document.getElementById('vehGaugeCluster');
+      if (cluster) {
+        cluster.classList.remove('is-running', 'is-revving');
+      }
+    }
+
+    updateAudioButtonUi() {
+      const btn = document.getElementById('vehAudioBtn');
+      if (!btn) return;
+      const cfg = VEHICLE_CONFIGS[this.activeType];
+      const lbl = btn.querySelector('.btn-lbl');
+
+      btn.classList.remove('is-starting');
+      if (this.isEngineRunning) {
+        btn.classList.add('engine-running');
+        if (lbl) lbl.textContent = 'خاموش کردن پیشرانه';
+      } else {
+        btn.classList.remove('engine-running');
+        if (lbl) lbl.textContent = cfg ? cfg.audioBtnLabel : 'استارت پیشرانه';
+      }
+    }
+
+    // START THROTTLE (گاز دادن و کاتاف)
+    async startThrottle() {
+      // If engine is not running yet, auto-start first!
+      if (!this.isEngineRunning && !this.isStarting) {
+        await this.startEngineSequence();
+        return;
+      }
+      if (this.isStarting || !this.isEngineRunning) return;
+
       this.isThrottling = true;
       this.throttleProgress = 0;
 
       const cfg = VEHICLE_CONFIGS[this.activeType];
       const stage = document.getElementById('heroVehicleStage');
       const revBtn = document.getElementById('vehRevBtn');
+      const cluster = document.getElementById('vehGaugeCluster');
 
       if (stage) stage.classList.add('vehicle-rev-squat');
       if (revBtn) revBtn.classList.add('throttling-active');
+      if (cluster) cluster.classList.add('is-revving');
 
-      // Continuous smoke burst
       const emitBurst = () => {
         if (this.canvas && cfg) {
           const emitX = (cfg.exhaust.x / 100) * this.cssW;
@@ -790,12 +999,10 @@
 
         if (this.throttleProgress < 1.0) {
           this.throttleProgress = Math.min(1.0, this.throttleProgress + 0.12);
-          if (this.audioEnabled) {
-            this.audio.setThrottlePitch(this.throttleProgress, this.activeType);
-          }
+          this.audio.setThrottlePitch(this.throttleProgress, this.activeType);
           emitBurst();
         } else {
-          // AT REDLINE: ENTER REV LIMITER BOUNCE (کاتاف)!
+          // Redline Limiter Bounce (کاتاف)!
           if (!this.limiterTimer) {
             this._startLimiterBounce();
           }
@@ -803,7 +1010,6 @@
       }, 40);
     }
 
-    // REV LIMITER BOUNCE (کاتاف و شلیک پاف‌های دود)
     _startLimiterBounce() {
       const cfg = VEHICLE_CONFIGS[this.activeType];
       const stage = document.getElementById('heroVehicleStage');
@@ -816,9 +1022,7 @@
         }
 
         // Trigger audio limiter cut stutter (کاتاف)
-        if (this.audioEnabled) {
-          this.audio.triggerLimiterCut(this.activeType);
-        }
+        this.audio.triggerLimiterCut(this.activeType);
 
         // Rapid limiter smoke puff
         if (this.canvas && cfg) {
@@ -836,7 +1040,6 @@
       }, 65);
     }
 
-    // RELEASE THROTTLE (رها کردن گاز و بازگشت نرم به دور آرام)
     stopThrottle() {
       if (!this.isThrottling) return;
       this.isThrottling = false;
@@ -853,86 +1056,151 @@
 
       const stage = document.getElementById('heroVehicleStage');
       const revBtn = document.getElementById('vehRevBtn');
+      const cluster = document.getElementById('vehGaugeCluster');
 
       if (stage) {
-        stage.classList.remove('vehicle-rev-squat');
-        stage.classList.remove('limiter-shake');
+        stage.classList.remove('vehicle-rev-squat', 'limiter-shake');
       }
       if (revBtn) revBtn.classList.remove('throttling-active');
+      if (cluster) cluster.classList.remove('is-revving');
 
-      if (this.audioEnabled) {
+      if (this.isEngineRunning) {
         this.audio.releaseThrottle(this.activeType);
       }
     }
 
-    toggleAudio(btn) {
-      const cfg = VEHICLE_CONFIGS[this.activeType];
-      if (!this.audioEnabled) {
-        this.audio.start(this.activeType);
-        this.audioEnabled = true;
-        if (btn) {
-          btn.classList.add('on');
-          btn.querySelector('.btn-lbl').textContent = `${cfg ? cfg.audioBtnLabel : 'صدا'}: روشن`;
-        }
-      } else {
-        this.audio.stop();
-        this.audioEnabled = false;
-        if (btn) {
-          btn.classList.remove('on');
-          btn.querySelector('.btn-lbl').textContent = cfg ? cfg.audioBtnLabel : 'صدا: خاموش';
-        }
-      }
-    }
-
-    startSmokeLoop() {
+    /**
+     * Main Animation Loop:
+     * - Renders dynamic smoke particles only when engine running
+     * - Drives Cockpit Gauge Cluster (عقربه دور موتور، سرعت دیجیتال، دنده، چراغ کاتاف)
+     */
+    startMainLoop() {
       let frameCount = 0;
       const sprite = this.smokeSprite || getSmokeSprite();
 
+      const needleEl = document.getElementById('clusterNeedle');
+      const arcEl = document.getElementById('clusterRpmArc');
+      const shiftLightEl = document.getElementById('clusterShiftLight');
+      const gearEl = document.getElementById('clusterGear');
+      const speedNumEl = document.getElementById('clusterSpeedNum');
+      const rpmNumEl = document.getElementById('vehRpmValue');
+      const readyIconEl = document.getElementById('clusterReadyIcon');
+      const engineIconEl = document.getElementById('clusterEngineIcon');
+
       const loop = () => {
         this.animId = requestAnimationFrame(loop);
-        if (!this.canvas || !this.ctx) return;
-
         frameCount++;
+
         const cfg = VEHICLE_CONFIGS[this.activeType];
         if (!cfg) return;
 
-        const cw = this.cssW;
-        const ch = this.cssH;
+        // 1. Smoke Canvas rendering (only emits when engine is on)
+        if (this.canvas && this.ctx) {
+          const cw = this.cssW;
+          const ch = this.cssH;
+          this.ctx.clearRect(0, 0, cw, ch);
 
-        this.ctx.clearRect(0, 0, cw, ch);
+          if (this.isEngineRunning && !this.isThrottling && frameCount % 3 === 0 && this.particles.length < 32) {
+            const emitX = (cfg.exhaust.x / 100) * cw;
+            const emitY = (cfg.exhaust.y / 100) * ch;
+            this.particles.push(new SmokeParticle(emitX, emitY, cfg.exhaust, false));
+          }
 
-        // Continuous realistic idle exhaust
-        if (!this.isThrottling && frameCount % 3 === 0 && this.particles.length < 32) {
-          const emitX = (cfg.exhaust.x / 100) * cw;
-          const emitY = (cfg.exhaust.y / 100) * ch;
-          this.particles.push(new SmokeParticle(emitX, emitY, cfg.exhaust, false));
-        }
-
-        for (let i = this.particles.length - 1; i >= 0; i--) {
-          const p = this.particles[i];
-          p.update();
-          p.draw(this.ctx, sprite);
-          if (p.isDead()) {
-            this.particles.splice(i, 1);
+          for (let i = this.particles.length - 1; i >= 0; i--) {
+            const p = this.particles[i];
+            p.update();
+            p.draw(this.ctx, sprite);
+            if (p.isDead()) {
+              this.particles.splice(i, 1);
+            }
           }
         }
 
-        // Live smooth RPM indicator with limiter bounce
-        let targetRpm = cfg.idleRpm;
-        if (this.isThrottling) {
-          if (this.throttleProgress >= 0.98) {
-            // Limiter bounce oscillation (کاتاف)
-            const jitter = (Math.random() - 0.5) * (cfg.maxRpm * 0.04);
-            targetRpm = cfg.maxRpm + jitter;
+        // 2. Cockpit Instrument Cluster Dynamics
+        if (!this.isGaugeSweeping) {
+          if (this.isEngineRunning) {
+            if (this.isThrottling) {
+              if (this.throttleProgress >= 0.98) {
+                // Cutoff Limiter Jitter (پرش عقربه در کاتاف)
+                const jitter = (Math.random() - 0.5) * (cfg.maxRpm * 0.05);
+                this.targetRpm = cfg.maxRpm + jitter;
+                this.targetSpeed = this.activeType === 'car' ? 118 : (this.activeType === 'motor' ? 95 : 42);
+              } else {
+                this.targetRpm = cfg.idleRpm + (cfg.revRpm - cfg.idleRpm) * this.throttleProgress;
+                this.targetSpeed = (this.activeType === 'car' ? 110 : (this.activeType === 'motor' ? 90 : 40)) * this.throttleProgress;
+              }
+            } else {
+              this.targetRpm = cfg.idleRpm;
+              this.targetSpeed = 0;
+            }
           } else {
-            targetRpm = cfg.idleRpm + (cfg.revRpm - cfg.idleRpm) * this.throttleProgress;
+            this.targetRpm = 0;
+            this.targetSpeed = 0;
+          }
+
+          // Smooth interpolation towards target
+          this.currentRpm += (this.targetRpm - this.currentRpm) * 0.20;
+          this.currentSpeed += (this.targetSpeed - this.currentSpeed) * 0.18;
+        }
+
+        // Cluster calculations
+        const maxGaugeRpm = (cfg.maxRpm || 9000) * 1.05;
+        const progress = Math.max(0, Math.min(1.0, this.currentRpm / maxGaugeRpm));
+        // Dial sweeps from -115 deg to +115 deg (230 total sweep)
+        const needleAngle = -115 + (progress * 230);
+        const arcOffset = 170 * (1 - progress);
+
+        // Apply to SVG Needle & Arc
+        if (needleEl) {
+          needleEl.style.transform = `rotate(${needleAngle.toFixed(1)}deg)`;
+        }
+        if (arcEl) {
+          arcEl.style.strokeDashoffset = `${arcOffset.toFixed(1)}`;
+        }
+
+        // Shift Light (Flashes when RPM >= 92% of max)
+        if (shiftLightEl) {
+          if (progress >= 0.92) {
+            shiftLightEl.classList.add('active');
+          } else {
+            shiftLightEl.classList.remove('active');
           }
         }
 
-        if (Math.abs(this.rpmVal - targetRpm) > 4) {
-          this.rpmVal += (targetRpm - this.rpmVal) * 0.18;
-          const rpmEl = document.getElementById('vehRpmValue');
-          if (rpmEl) rpmEl.textContent = Math.round(this.rpmVal).toLocaleString('fa-IR');
+        // Transmission Gear Indicator
+        if (gearEl) {
+          if (!this.isEngineRunning && !this.isStarting) {
+            gearEl.textContent = 'P';
+            gearEl.className = 'cluster-gear';
+          } else if (this.isThrottling) {
+            gearEl.textContent = '1';
+            gearEl.className = 'cluster-gear gear-drive';
+          } else {
+            gearEl.textContent = 'N';
+            gearEl.className = 'cluster-gear gear-n';
+          }
+        }
+
+        // Digital Speedometer (KM/H)
+        if (speedNumEl) {
+          const spdVal = Math.round(this.currentSpeed);
+          speedNumEl.textContent = spdVal.toLocaleString('fa-IR');
+        }
+
+        // Digital RPM Readout
+        if (rpmNumEl) {
+          const rpmVal = Math.max(0, Math.round(this.currentRpm));
+          rpmNumEl.textContent = rpmVal.toLocaleString('fa-IR');
+        }
+
+        // Status Icons
+        if (readyIconEl) {
+          if (this.isEngineRunning) readyIconEl.classList.add('active');
+          else readyIconEl.classList.remove('active');
+        }
+        if (engineIconEl) {
+          if (this.isEngineRunning) engineIconEl.classList.add('off');
+          else engineIconEl.classList.remove('off');
         }
       };
 

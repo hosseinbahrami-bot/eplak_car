@@ -558,6 +558,13 @@ html[data-theme="day"] .body-card .bt-img img {
 .headlight-lens.strip-lens {
   border-radius: 999px;
 }
+.headlight-lens.round-lens {
+  border-radius: 50%;
+}
+.headlight-lens.round-lens .lamp-crystal-core {
+  border-radius: 50%;
+  box-shadow: 0 0 16px 6px rgba(255, 255, 255, 0.95), 0 0 32px 10px rgba(11, 152, 156, 0.6);
+}
 .lamp-crystal-core {
   width: 100%;
   height: 100%;
@@ -668,35 +675,233 @@ html[data-theme="day"] .body-card .bt-img img {
   left: 14px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   z-index: 10;
   pointer-events: none;
 }
-.veh-telemetry-pill {
-  display: inline-flex;
+
+/* Digital-Analog Cockpit Instrument Cluster (صفحه کیلومتر سوپراسپرت) */
+.veh-gauge-cluster {
+  display: flex;
   align-items: center;
-  gap: 7px;
-  background: rgba(6, 26, 27, 0.78);
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(4, 16, 20, 0.88) 0%, rgba(8, 28, 32, 0.84) 100%);
   border: 1px solid rgba(11, 152, 156, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: 5px 12px;
-  border-radius: 999px;
-  font-size: 11px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 6px 12px;
+  border-radius: 14px;
   color: #e6f8f8;
-  font-weight: 500;
+  direction: ltr;
+  position: relative;
+  overflow: hidden;
+  pointer-events: auto;
+  user-select: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-.veh-live-dot {
-  width: 7px;
-  height: 7px;
+
+.veh-gauge-cluster::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(11, 152, 156, 0.85), rgba(244, 135, 17, 0.85), transparent);
+}
+
+.veh-gauge-cluster.is-running {
+  border-color: rgba(11, 152, 156, 0.85);
+  box-shadow: 0 4px 25px rgba(11, 152, 156, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.veh-gauge-cluster.is-revving {
+  border-color: rgba(244, 135, 17, 0.95);
+  box-shadow: 0 4px 30px rgba(244, 135, 17, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.cluster-dial-box {
+  position: relative;
+  width: 60px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cluster-dial-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.cluster-track-bg {
+  stroke: rgba(255, 255, 255, 0.15);
+}
+
+.cluster-track-active {
+  transition: stroke-dashoffset 0.08s ease-out;
+}
+
+#clusterNeedle {
+  transition: transform 0.08s ease-out;
+  transform-origin: 50px 54px;
+  filter: drop-shadow(0 0 3px #f48711);
+}
+
+.cluster-shift-light {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 10px #10b981;
-  animation: liveDotPulse 1.6s ease-in-out infinite;
+  background: #334155;
+  transition: background 0.1s, box-shadow 0.1s;
 }
-@keyframes liveDotPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.45; transform: scale(0.85); }
+
+.cluster-shift-light.active {
+  background: #ef4444;
+  box-shadow: 0 0 8px #ef4444, 0 0 16px #ef4444;
+  animation: shiftLightFlash 0.08s infinite alternate;
+}
+
+@keyframes shiftLightFlash {
+  0% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.cluster-data {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 104px;
+}
+
+.cluster-data-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.cluster-gear {
+  font-size: 13px;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #94a3b8;
+  font-family: monospace, sans-serif;
+  transition: all 0.2s ease;
+}
+
+.cluster-gear.gear-n {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.6);
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.cluster-gear.gear-drive {
+  color: #f48711;
+  border-color: rgba(244, 135, 17, 0.65);
+  background: rgba(244, 135, 17, 0.2);
+}
+
+.cluster-speed {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.speed-num {
+  font-size: 19px;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  font-family: 'SF Pro Display', -apple-system, monospace, sans-serif;
+  letter-spacing: -0.5px;
+  min-width: 26px;
+  text-align: right;
+}
+
+.speed-unit {
+  font-size: 9px;
+  font-weight: 700;
+  color: #0b989c;
+  letter-spacing: 0.5px;
+}
+
+.cluster-data-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding-top: 2px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cluster-rpm-digital {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+}
+
+.rpm-lbl {
+  color: #94a3b8;
+  font-size: 9px;
+}
+
+.rpm-val b {
+  color: #f48711;
+  font-weight: 700;
+  font-family: monospace, sans-serif;
+}
+
+.rpm-val small {
+  font-size: 8px;
+  color: #64748b;
+}
+
+.cluster-status-icons {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cluster-icon {
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 1px 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.icon-engine {
+  color: #eab308;
+  opacity: 0.85;
+}
+
+.icon-engine.off {
+  opacity: 0.2;
+}
+
+.icon-ready {
+  color: #475569;
+  opacity: 0.4;
+  transition: all 0.2s;
+}
+
+.icon-ready.active {
+  color: #10b981;
+  opacity: 1;
+  background: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
 }
 
 .veh-specs-pill {
@@ -778,6 +983,70 @@ html[data-theme="day"] .body-card .bt-img img {
   background: #0b989c;
   border-color: #0b989c;
   color: #fff;
+}
+.veh-act-btn.btn-engine-start {
+  border-color: rgba(244, 135, 17, 0.7);
+  background: linear-gradient(135deg, rgba(6, 26, 27, 0.9) 0%, rgba(20, 35, 45, 0.95) 100%);
+}
+.veh-act-btn.btn-engine-start:hover {
+  border-color: #f48711;
+  background: #f48711;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(244, 135, 17, 0.45);
+}
+.veh-act-btn.btn-engine-start.is-starting {
+  border-color: #f48711 !important;
+  color: #f48711 !important;
+  background: rgba(244, 135, 17, 0.15) !important;
+  animation: engineStartPulse 0.45s ease-in-out infinite alternate;
+}
+@keyframes engineStartPulse {
+  0% { box-shadow: 0 0 6px rgba(244, 135, 17, 0.4); }
+  100% { box-shadow: 0 0 20px rgba(244, 135, 17, 0.85); }
+}
+.veh-act-btn.btn-engine-start.engine-running {
+  border-color: rgba(16, 185, 129, 0.75);
+  background: linear-gradient(135deg, rgba(6, 40, 35, 0.88) 0%, rgba(6, 26, 27, 0.92) 100%);
+  color: #34d399;
+}
+.veh-act-btn.btn-engine-start.engine-running:hover {
+  border-color: #ef4444;
+  background: #ef4444;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.45);
+}
+
+@media (max-width: 600px) {
+  .veh-hud-top {
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    gap: 6px;
+  }
+  .veh-gauge-cluster {
+    padding: 4px 8px;
+    gap: 6px;
+    border-radius: 10px;
+  }
+  .cluster-dial-box {
+    width: 48px;
+    height: 36px;
+  }
+  .cluster-data {
+    min-width: 85px;
+    gap: 1px;
+  }
+  .speed-num {
+    font-size: 15px;
+  }
+  .cluster-gear {
+    font-size: 11px;
+    padding: 0 4px;
+  }
+  .veh-specs-pill {
+    padding: 3px 8px;
+    font-size: 9.5px;
+  }
 }
 
 @media (max-width: 1024px) {

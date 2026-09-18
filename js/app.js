@@ -300,16 +300,51 @@
               </div>
 
               <div class="veh-hud-top">
-                <div class="veh-telemetry-pill">
-                  <span class="veh-live-dot"></span>
-                  <span>پیشرانه فعال · <b id="vehRpmValue">۷۵۰</b> RPM</span>
+                <div class="veh-gauge-cluster" id="vehGaugeCluster" title="صفحه کیلومتر و دور موتور هوشمند">
+                  <div class="cluster-dial-box">
+                    <svg class="cluster-dial-svg" viewBox="0 0 100 62">
+                      <path class="cluster-track-bg" d="M 14 54 A 38 38 0 1 1 86 54" fill="none" stroke-width="4.5" stroke-linecap="round"/>
+                      <path class="cluster-track-active" id="clusterRpmArc" d="M 14 54 A 38 38 0 1 1 86 54" fill="none" stroke="url(#clusterRpmGrad)" stroke-width="4.5" stroke-linecap="round" stroke-dasharray="170" stroke-dashoffset="170"/>
+                      <defs>
+                        <linearGradient id="clusterRpmGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+                          <stop offset="0%" stop-color="#0b989c"/>
+                          <stop offset="65%" stop-color="#f48711"/>
+                          <stop offset="92%" stop-color="#ef4444"/>
+                        </linearGradient>
+                      </defs>
+                      <circle cx="50" cy="54" r="5" fill="#0d1b22" stroke="#f48711" stroke-width="1.5"/>
+                      <line id="clusterNeedle" x1="50" y1="54" x2="50" y2="18" stroke="#f48711" stroke-width="2.2" stroke-linecap="round" transform="rotate(-115 50 54)"/>
+                    </svg>
+                    <div class="cluster-shift-light" id="clusterShiftLight"></div>
+                  </div>
+
+                  <div class="cluster-data">
+                    <div class="cluster-data-top">
+                      <span class="cluster-gear" id="clusterGear" title="وضعیت گیربکس">P</span>
+                      <div class="cluster-speed">
+                        <span class="speed-num" id="clusterSpeedNum">۰</span>
+                        <span class="speed-unit">KM/H</span>
+                      </div>
+                    </div>
+                    <div class="cluster-data-bottom">
+                      <div class="cluster-rpm-digital">
+                        <span class="rpm-lbl">دور:</span>
+                        <span class="rpm-val"><b id="vehRpmValue">۰</b> <small>RPM</small></span>
+                      </div>
+                      <div class="cluster-status-icons">
+                        <span class="cluster-icon icon-engine" id="clusterEngineIcon" title="چراغ چک انجین">ENG</span>
+                        <span class="cluster-icon icon-ready" id="clusterReadyIcon" title="وضعیت استارت پیشرانه">READY</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
                 <div class="veh-specs-pill" id="vehSpecs">V6 توئین‌توربو · ۶۰۰ اسب بخار</div>
               </div>
 
               <div class="veh-hud-bottom">
                 <div class="veh-model-badge">
-                  <b id="vehModelName">سوپراسپرت نیسان GT-R نیسمو</b>
+                  <b id="vehModelName">پورشه 911 GT3 RS</b>
                   <small>آتلیه تخصصی صفر چی · تست چراغ و پیشرانه</small>
                 </div>
                 <div class="veh-actions-bar">
@@ -321,9 +356,9 @@
                     <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
                     <span>گاز دادن (کاتاف)</span>
                   </button>
-                  <button type="button" class="veh-act-btn btn-audio" id="vehAudioBtn" title="صدای واقعی انجین">
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                    <span class="btn-lbl">صدا: خاموش</span>
+                  <button type="button" class="veh-act-btn btn-audio btn-engine-start" id="vehAudioBtn" title="استارت و کنترل پیشرانه">
+                    <svg class="engine-start-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+                    <span class="btn-lbl">استارت پیشرانه</span>
                   </button>
                 </div>
               </div>

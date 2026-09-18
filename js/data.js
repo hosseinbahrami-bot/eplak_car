@@ -497,9 +497,18 @@ SC.cars = [
 
 SC.motors = [
   {
-    id: "m01", type: "motor", brand: "دوکاتی", model: "Panigale V4", year: 2023, yearFa: 1402,
+    id: "m01", type: "motor", brand: "هوندا", model: "CB 1300 Super Four (سفید-قرمز)", year: 2024, yearFa: 1403,
+    mileage: 1200, price: 4250000000, oldPrice: 4500000000, gear: "دنده‌ای", fuel: "بنزینی",
+    color: "سفید-قرمز", city: "تهران", district: "فرمانیه", img: "images/motor-hero.jpg", photos: 8, video: true,
+    inspected: true, verified: true, pinned: true, branch: "شعبه فرمانیه",
+    seller: "صفر چی گالری", posted: "امروز",
+    desc: "هوندا CB1300 سوپرفور سفید-قرمز اصیل ژاپن، باک سفید با خطوط قرمز نمادین هوندا، کارکرد در حد خشک، انجین ۴ سیلندر ۱۲۸۴ سی‌سی فوق‌العاده نرم.",
+    cc: 1284, category: "استریت"
+  },
+  {
+    id: "m02", type: "motor", brand: "دوکاتی", model: "Panigale V4", year: 2023, yearFa: 1402,
     mileage: 3100, price: 4850000000, oldPrice: 5100000000, gear: "دنده‌ای", fuel: "بنزینی",
-    color: "قرمز", city: "تهران", district: "فرمانیه", img: "images/ducati.jpg", photos: 8, video: true,
+    color: "قرمز", city: "تهران", district: "فرمانیه", img: "images/motor-hero.jpg", photos: 8, video: true,
     inspected: true, verified: true, pinned: true, branch: "شعبه فرمانیه",
     seller: "صفر چی گالری", posted: "دیروز",
     desc: "پانیگاله V4 کم‌کارکرد، سرویس کامل کارخانه، تایرهای نو.",
